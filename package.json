@@ -1,0 +1,38 @@
+{
+  "name": "ddiary",
+  "version": "1.0.0",
+  "description": "diary app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "git push heroku master",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "engines": {
+    "node": "8.9.1",
+    "npm": "5.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmichalczuk/ddiary.git"
+  },
+  "author": "bmichalczuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bmichalczuk/ddiary/issues"
+  },
+  "homepage": "https://github.com/bmichalczuk/ddiary#readme",
+  "dependencies": {
+    "concurrently": "^3.5.1",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.3",
+    "mongoose": "^4.13.9",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.12"
+  }
+}
