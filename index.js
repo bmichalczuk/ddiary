@@ -5,7 +5,7 @@ const express = require("express"),
     cookieSession = require("cookie-session"),
     passport = require("passport");
 
-mongoose.connect(keys.mongoURI);
+/*mongoose.connect(keys.mongoURI);
 
 app.use(
     cookieSession({
@@ -16,7 +16,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+*/
 app.get("/", (req, res) => {
     res.send({hi: "there"});
 });
