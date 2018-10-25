@@ -4,8 +4,10 @@ const express = require("express"),
     mongoose = require("mongoose"),
     cookieSession = require("cookie-session"),
     passport = require("passport");
+require("./models/User");
+require("./services/passport");
 
-/*mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI);
 
 app.use(
     cookieSession({
@@ -16,10 +18,12 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-*/
+
 app.get("/", (req, res) => {
     res.send({hi: "there"});
 });
+
+require("./routes/authRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
