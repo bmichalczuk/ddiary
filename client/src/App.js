@@ -1,12 +1,25 @@
-import React from "react";
+import React, {Component} from "react";
+import {fetchUser} from "./actions/index";
+import {connect} from "react-redux";
 
-
-const App = () => {
-    return (
-        <div>
-            hello world
-        </div>
-    );
+class App extends Component {
+    async componentDidMount() {
+        this.props.fetchUser();
+        
+    }
+    render() { 
+        
+        return (
+            <div>
+                {this.props.auth ? `Hello ${this.props.auth.googleId}` : "hello world"}
+            </div>
+        
+        );     
+    }
 };
 
-export default App;
+function mapStateToProps({auth}) {
+    return {auth}
+}
+
+export default connect(mapStateToProps, {fetchUser})(App);
