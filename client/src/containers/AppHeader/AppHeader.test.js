@@ -1,5 +1,5 @@
 import React from "react";
-import AppHeader from "./AppHeader";
+import {AppHeader} from "./AppHeader";
 import {shallow, configure} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
@@ -8,7 +8,7 @@ configure({adapter: new Adapter});
 describe('<AppHeader/> with no user logged in', () => {
     let wrapper;
     beforeEach(() => {
-        wrapper = shallow(<AppHeader />);
+        wrapper = shallow(<AppHeader />).setProps({auth: null});
     });
     it('Has h1 heading', () => {
         expect(wrapper.find('h1').exists()).toEqual(true);
@@ -37,8 +37,8 @@ describe('<AppHeader/> with no user logged in', () => {
         it('Has link with href of "/diary"', () => {
             expect(wrapper.find('a[href="/diary"]').exists()).toEqual(true);
         });
-        it('Has no logout link', () => {
-            expect(wrapper.find('a[href="/api/logout"]').exists()).toEqual(false);
+        it('Has logout link', () => {
+            expect(wrapper.find('a[href="/api/logout"]').exists()).toEqual(true);
         });
         describe('AppHeader logo with user logged in', () => {
             let logo;
