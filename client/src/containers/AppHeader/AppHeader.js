@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import ddiarylogo from "./logo.png";
+import ddiarylogo from "./logo-white.png";
 import styled from "styled-components";
 
 export const AppHeader = (props) => {
@@ -34,12 +34,15 @@ function mapDispatchToProps({auth}) {
     return {auth};
 };
 const styledAppHeader = styled(AppHeader)`
-    display:flex;
+    min-height: 5em;
+    display: flex;
     justify-content: space-between;
     align-content: stretch;
-    font-family: "BebasNeue";
+    background-color: ${props => props.theme.secondaryColor};
     h1 {
-        margin-left: 2em;
+        margin-left: 1em;
+        display: flex;
+        align-items: center;
     }
     span {
         position: absolute; 
@@ -58,13 +61,15 @@ const styledAppHeader = styled(AppHeader)`
             align-items: center;
             height: 100%;
             text-decoration: none;
-            font-size: 1.2em;
-            transition: .2s;
+            font-size: 1.5em;
+            font-weight: bolder;
+            color: ${props => props.theme.primaryColor};
+            transition: .4s;
             padding-right: .5em;
             :hover,
             :focus {
-                background-color: lightgrey;
-                color: white;
+                background-color: ${props => props.theme.fourthColor};
+                color: ${props => props.theme.secondaryColor};
             }
         }
     }

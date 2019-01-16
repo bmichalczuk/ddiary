@@ -1,4 +1,6 @@
 import {createGlobalStyle} from "styled-components";
+import Roboto from "./fonts/Robotto/roboto-regular-webfont.woff";
+import BebasNeue from "./fonts/BebasNeue/bebasneue_regular-webfont.woff";
 
 const GlobalStyles = createGlobalStyle`
     * {
@@ -8,20 +10,18 @@ const GlobalStyles = createGlobalStyle`
         padding: 0;
     }
 
-    .visually-hidden {
-        position: absolute; 
-        overflow: hidden; 
-        clip: rect(0 0 0 0); 
-        height: 1px; width: 1px; 
-        margin: -1px; padding: 0; border: 0; 
-    }
     @font-face {
     font-family: "Roboto";
-    src: local("Roboto Regular"), url("./fonts/Robotto/roboto-regular-webfont.woff") format("woff");
+    src: url(${Roboto}) format("woff");
     }
     @font-face {
     font-family: "BebasNeue";
-    src: url("./fonts/BebasNeue/bebasneue_regular-webfont.woff") format("woff");
+    src: url(${BebasNeue}) format("woff");
+    }
+    body {
+        font-family: ${props => props.theme.textFont};
+        background-color: ${props => props.theme.primaryColor};
+        color: ${props => props.theme.primaryColor};
     }
 `;
 

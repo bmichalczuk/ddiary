@@ -3,7 +3,12 @@ const mongoose = require("mongoose"),
 
 const userSchema = new Schema({
     googleId: String,
-    data: Object
+    data: {
+        type: Object,
+        default: {
+            diary: null
+        }
+    }
 });
 
 mongoose.model("users", userSchema);

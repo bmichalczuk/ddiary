@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import AppHeader from "./containers/AppHeader/AppHeader";
 import Layout from "./components/Layout/Layout";
 import LandingPage from "./components/LandingPage/LandingPage";
-const Diary = () => <div>Dashboard</div>;
+import Diary from "./containers/Diary/Diary";
 
 const DiaryNew = () => <div>diary new</div>
 
