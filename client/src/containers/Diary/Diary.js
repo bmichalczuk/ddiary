@@ -1,27 +1,34 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 import DiaryEntry from "../../components/DiaryEntry/DiaryEntry";
+import DiaryEntriesList from "../../components/DiaryEntriesList/DiaryEntriesList";
+import {connect} from "react-redux";
+import RichTextEditor from "../../components/RichTextEditor/RichTextEditor";
+
 export class Diary extends Component {
     constructor(props) {
         super(props);
-        this.state = {selected: ""};
+        this.state = {selectedEntry: null};
     }
     render() {
         return (
             <section className={this.props.className}>
-                <nav>
-                    <ol>
-                        <li>1</li>
-                        <li>3</li>
-                        <li>4</li>
-                    </ol>
-                </nav>
-                <DiaryEntry />
-                
+                {this.state.selectedEntry 
+                ? <DiaryEntry />
+                : <DiaryEntriesList />
+                }
+                <RichTextEditor />
             </section>
         );
     }
 };
 
-const StyledDiary = styled(Diary)``;
-export default StyledDiary;
+const StyledDiary = styled(Diary)`
+    background-color: #fffaaa;
+`;
+
+function mapStateToProps({auth}) {
+    return {auth};
+};
+
+export default connect(mapStateToProps)(StyledDiary);

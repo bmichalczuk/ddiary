@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export const DiaryEntry = ({entry}) => {
     return (
-        
             <article>
                 <h2>data</h2>
                     lorem impsmaadfasdf

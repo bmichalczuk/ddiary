@@ -30,9 +30,7 @@ export const AppHeader = (props) => {
     );
 };
 
-function mapDispatchToProps({auth}) {
-    return {auth};
-};
+
 const styledAppHeader = styled(AppHeader)`
     min-height: 5em;
     display: flex;
@@ -73,7 +71,10 @@ const styledAppHeader = styled(AppHeader)`
             }
         }
     }
-
-
 `;
-export default connect(mapDispatchToProps)(styledAppHeader);
+
+function mapStateToProps({auth}) {
+    return {auth};
+};
+
+export default connect(mapStateToProps)(styledAppHeader);
