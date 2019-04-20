@@ -24,7 +24,8 @@ export class Diary extends Component {
 };
 
 const StyledDiary = styled(Diary)`
-    background-color: #fffaaa;
+    background-color: inherit;
+    color: black;
 `;
 
 function mapStateToProps({auth}) {
