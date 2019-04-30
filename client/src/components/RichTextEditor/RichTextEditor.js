@@ -12,17 +12,15 @@ const EditorContainer = styled.div`
   align-content: center;
   align-items: center;
   justify-content: stretch;
-  background-color: pink;
-  min-width: 80vw;
-  max-width: 300px;
-  border: 1px solid lightblue;
+  max-width: 800px;
+  border: 1px solid #ddd;
   .DraftEditor-root {
     background-color: #fffef7;
     flex: 1;
     overflow-y: scroll;
     height: 300px;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
   }
   .blockquote {
     font-family: 'Hoefler Text', Georgia, serif;
@@ -30,23 +28,17 @@ const EditorContainer = styled.div`
     border-left: solid #EEEEEE 5px;
     padding: 10px;
   }
-  .heading-one {
-    text-align: center;
-    text-transform: capitalize;
-  }
-  .heading-one {
-    font-size: 2em;
-  }
 `;
 
 const Toolbar = styled.div`
   height: 2em;
-  width: 80%;
-  border: 1px solid black;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
   background-color: ${({theme}) => theme.primaryColor};
   display: flex;
   justify-content: left;
   align-items: stretch;
+  padding: 0 .5em;
 `;
 
 class StyleBtn extends Component {
@@ -185,7 +177,7 @@ const BlockStylesControls = (props) => {
         label="heading level one"
         toggleStyle={props.toggleStyle}
         style="header-one"
-        active={blockType === "heading-one"}
+        active={blockType === "header-one"}
       >
         H1
       </HeadingBtn>
@@ -233,12 +225,12 @@ class RichTextEditor extends Component {
       editorState: EditorState.createEmpty()
     }
   }
-  onChange = (editorState) => this.setState({editorState});
+  onChange = (editorState) => this.props.onChange("editorState", editorState);
   onFocus = () => this.refs.editor.focus();
   toggleBlockType = (blockType) => {
     this.onChange(
       RichUtils.toggleBlockType(
-        this.state.editorState,
+        this.props.editorState,
         blockType
       )
     );
@@ -246,7 +238,7 @@ class RichTextEditor extends Component {
   toggleInlineStyle = (inlineStyle) => {
     this.onChange(
       RichUtils.toggleInlineStyle(
-        this.state.editorState,
+        this.props.editorState,
         inlineStyle
       )
     );
@@ -260,23 +252,25 @@ class RichTextEditor extends Component {
     return false;
   }
   render() {
-    return (
-      <EditorContainer onClick={this.onFocus}>
-        <h1>Add Entry</h1>
-        <Toolbar>
-          <InlineStylesControls toggleStyle={this.toggleInlineStyle} editorState={this.state.editorState}/>
-          <BlockStylesControls toggleStyle={this.toggleBlockType} editorState={this.state.editorState} />
-        </Toolbar>
-        <Editor
-          handleKeyCommand={this.handleKeyCommand}
-          keyBindingFn={getDefaultKeyBinding}
-          editorState={this.state.editorState}
-          onChange={this.onChange}
-          blockStyleFn={blockStyles}
-          ref="editor"
-          />
-      </EditorContainer>
-    );
+    if(this.props.editorState) {
+      return (
+        <EditorContainer onClick={this.onFocus}>
+          <Toolbar>
+            <InlineStylesControls toggleStyle={this.toggleInlineStyle} editorState={this.props.editorState}/>
+            <BlockStylesControls toggleStyle={this.toggleBlockType} editorState={this.props.editorState} />
+          </Toolbar>
+          <Editor
+            handleKeyCommand={this.handleKeyCommand}
+            keyBindingFn={getDefaultKeyBinding}
+            editorState={this.props.editorState}
+            onChange={this.onChange}
+            blockStyleFn={blockStyles}
+            ref="editor"
+            />
+        </EditorContainer>
+      );
+    } return <div>Loading</div>;
+    
   }
 };
 

@@ -3,21 +3,21 @@ import styled from "styled-components";
 import DiaryEntry from "../../components/DiaryEntry/DiaryEntry";
 import DiaryEntriesList from "../../components/DiaryEntriesList/DiaryEntriesList";
 import {connect} from "react-redux";
-import RichTextEditor from "../../components/RichTextEditor/RichTextEditor";
-
+import DiaryEntryForm from "../DiaryEntryForm/DiaryEntryForm";
 export class Diary extends Component {
     constructor(props) {
         super(props);
         this.state = {selectedEntry: null};
     }
     render() {
+        console.log(this.props.auth);
         return (
             <section className={this.props.className}>
                 {this.state.selectedEntry 
                 ? <DiaryEntry />
                 : <DiaryEntriesList />
                 }
-                <RichTextEditor />
+                <DiaryEntryForm />
             </section>
         );
     }
