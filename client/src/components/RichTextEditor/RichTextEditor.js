@@ -49,9 +49,16 @@ class StyleBtn extends Component {
     e.preventDefault();
     this.props.toggleStyle(this.props.style);
   }
+  onClick = (e) => {
+    e.preventDefault();
+  }
   render() {
     return (
-      <button title={this.props.label} className={this.props.className} onMouseDown={this.toggleStyle} >
+      <button 
+        onClick={this.onClick} 
+        title={this.props.label} 
+        className={this.props.className} 
+        onMouseDown={this.toggleStyle} >
         {this.props.children}
       </button>
     );
@@ -219,14 +226,11 @@ const BlockStylesControls = (props) => {
 
 
 class RichTextEditor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editorState: EditorState.createEmpty()
-    }
-  }
   onChange = (editorState) => this.props.onChange("editorState", editorState);
-  onFocus = () => this.refs.editor.focus();
+  onFocus = (e) => {
+    e.stopPropagation();
+    this.refs.editor.focus();
+  }
   toggleBlockType = (blockType) => {
     this.onChange(
       RichUtils.toggleBlockType(

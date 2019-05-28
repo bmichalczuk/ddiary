@@ -2,20 +2,35 @@ import React from "react";
 import RichTextEditor from "../../components/RichTextEditor/RichTextEditor";
 import axios from "axios";
 import {Formik, Form} from "formik";
-import {EditorState} from "draft-js";
+import {EditorState, convertToRaw} from "draft-js";
 import Button from "../../components/Button/Button";
-import {addEntry} from "../../actions";
-const DiaryEntryForm = (props) => {
+import Spinner from "../../components/Spinner/Spinner";
+import {fetchUser} from "../../actions";
+import styled from "styled-components";
+
+const DiaryEntryForm = ({entry, className}) => {
+    let timestamp;
+    let editorState;
+    if(entry) {
+        timestamp = entry.timestamp;
+        editorState = entry.editorState;
+    } else {
+        timestamp = Date.now();
+        editorState = EditorState.createEmpty();
+    }
     return (
-        <div>
+        <div className={className}>
             <Formik
                 initialValues = {{
-                    timestamp: Date.now(),
-                    editorState: EditorState.createEmpty()
+                    timestamp,
+                    editorState
                     
                 }}
-                onSubmit = {(values, actions) => {
-                    axios.post("/api/diary", values);
+                onSubmit = {async (values, actions) => {
+                    const {timestamp, editorState} = values;
+                    const state = await convertToRaw(editorState.getCurrentContent());
+                    await axios.post("/api/diary", {timestamp, editorState: state });
+                    actions.setSubmitting(false);
                 }
                     
                 }
@@ -28,7 +43,14 @@ const DiaryEntryForm = (props) => {
                                 editorState={values.editorState}
                                 onChange={setFieldValue}
                             />
-                            <Button type="submit">Submit</Button>
+                            <Spinner  />
+                            <Button  
+                                title="Submit"
+                                loading={isSubmitting} 
+                                disabled={isSubmitting} 
+                                btnTheme="primary">
+                                Submit
+                            </Button>
                         </Form>
                     );
                 }}
@@ -37,4 +59,15 @@ const DiaryEntryForm = (props) => {
     );
 };
 
-export default DiaryEntryForm;
+const styledDiaryEntryForm = styled(DiaryEntryForm)`
+    form {
+        max-width: 800px;
+        background: pink;
+    }
+    form > button {
+        float: right;
+        margin-top: .5em;
+    }
+`;
+
+export default styledDiaryEntryForm;

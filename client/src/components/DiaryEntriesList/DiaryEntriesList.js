@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 import PropTyes from "prop-types";
+import {connect} from "react-redux";
+import DiaryEntry from "../DiaryEntry/DiaryEntry";
+import {converFromRaw, EditorState} from "draft-js";
 
 export class DiaryEntriesList extends Component {
     constructor(props) {
@@ -8,12 +11,24 @@ export class DiaryEntriesList extends Component {
         this.state = {selected: null};
     }
     render() {
-        return (     
-            <ol>
-                
-            </ol>
-        );
+        
+        if(this.props.auth) {
+            console.log(Object.values(this.props.auth.data.diary));
+            const entries = Object.values(this.props.auth.data.diary);
+            return( 
+                <ol>
+                    {entries.map(entry => <DiaryEntry key={entry.timestamp} entry={entry} /> )}
+
+
+                </ol>
+            );
+        }
+        return <div>nodata</div>
     };
 };
 
-export default DiaryEntriesList;
+
+function mapStateToProps({auth}) {
+    return {auth};
+}
+export default connect(mapStateToProps)(DiaryEntriesList);

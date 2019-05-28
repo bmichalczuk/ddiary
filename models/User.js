@@ -6,9 +6,9 @@ const userSchema = new Schema({
     data: {
         type: Object,
         default: {
-            diary: null
+            diary: {}
         }
     }
-});
+}, {minimize: false});
 
 mongoose.model("users", userSchema);
