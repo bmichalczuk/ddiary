@@ -17,8 +17,6 @@ const themes = {
     }
 };
 
-
-
 const StyledButton = styled.button`
         padding: 1em 1.5em;
         display: flex;
@@ -49,7 +47,6 @@ const StyledButton = styled.button`
             `;
         }}
 `;
-
 
 const Btn = (props) => {
     if (!props.loading) {

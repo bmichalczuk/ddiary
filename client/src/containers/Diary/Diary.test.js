@@ -4,7 +4,7 @@ import {shallow, configure} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {DiaryEntry} from "../../components/DiaryEntry/DiaryEntry";
 import {DiaryEntriesList} from "../../components/DiaryEntriesList/DiaryEntriesList";
-
+import Link from "react-router-dom";
 configure({adapter: new Adapter});
 
 describe("<Diary />", () => {
@@ -12,6 +12,9 @@ describe("<Diary />", () => {
     beforeEach(() => {
         wrapper = shallow(<Diary />);
     });
+    xit("Has link leading to /diary/new", () => {
+        
+    })
     it("Display entries list if there is no entry selected", () => {
         wrapper.setState({selectedEntry: false});
         expect(wrapper.find(DiaryEntriesList).exists()).toBe(true);

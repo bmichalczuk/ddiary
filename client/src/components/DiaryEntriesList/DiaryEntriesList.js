@@ -4,11 +4,14 @@ import PropTyes from "prop-types";
 import {connect} from "react-redux";
 import DiaryEntry from "../DiaryEntry/DiaryEntry";
 import {converFromRaw, EditorState} from "draft-js";
-
+import {fetchUser} from "../../actions";
 export class DiaryEntriesList extends Component {
     constructor(props) {
         super(props);
         this.state = {selected: null};
+    }
+    componentDidMount() {
+        this.props.fetchUser();
     }
     render() {
         
@@ -31,4 +34,4 @@ export class DiaryEntriesList extends Component {
 function mapStateToProps({auth}) {
     return {auth};
 }
-export default connect(mapStateToProps)(DiaryEntriesList);
+export default connect(mapStateToProps, {fetchUser})(DiaryEntriesList);

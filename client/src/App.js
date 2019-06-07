@@ -6,11 +6,11 @@ import AppHeader from "./containers/AppHeader/AppHeader";
 import Layout from "./components/Layout/Layout";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Diary from "./containers/Diary/Diary";
-
-const DiaryNew = () => <div>diary new</div>
+import DiaryNew from "./components/DiaryNew/DiaryNew";
+import {Redirect} from "react-router-dom";
 
 class App extends Component {
-    async componentDidMount() {
+    componentDidMount() {
         this.props.fetchUser();
     }
     render() { 
@@ -18,7 +18,13 @@ class App extends Component {
             <Router>
                 <Layout>
                     <AppHeader />
-                    <Route path="/" exact component={LandingPage} />
+                    <Route path="/" exact render={() => (
+                        this.props.auth ? (
+                            <Redirect to="/diary" />
+                        ) : (
+                            <LandingPage />
+                        )
+                    )} />
                     <Route path="/diary" exact component={Diary} />
                     <Route path="/diary/new" component={DiaryNew} />
                 </Layout>

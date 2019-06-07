@@ -3,9 +3,6 @@ import styled from "styled-components";
 
 const Spinner = (props) => <div className={props.className}></div>;
 
-
-
-
 const StyledSpinner = styled(Spinner)`
 
         @keyframes spin {
@@ -18,13 +15,13 @@ const StyledSpinner = styled(Spinner)`
                 return (
                         `width: ${props.size || "50px"};
                          height: ${props.size || "50px"};
+                         color: ${props => props.color || "#ffffff"};
                         `
                 );
                 
         }}
         border: 2px solid;
         margin: 0 4px;
-        color: ${props => props.color || "#ffffff"};
         border-radius: 100%;
         animation: spin 2s linear infinite;
         border-right-color: transparent;

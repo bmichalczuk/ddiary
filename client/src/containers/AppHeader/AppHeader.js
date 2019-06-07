@@ -2,12 +2,13 @@ import React from "react";
 import {connect} from "react-redux";
 import ddiarylogo from "./logo-white.png";
 import styled from "styled-components";
+import Spinner from "../../components/Spinner/Spinner";
 
 export const AppHeader = (props) => {
     const renderAuthStatus = () => {
         switch(props.auth) {
             case null:
-                return "Loading";
+                return <Spinner />;
             case false: 
                 return <a title="Login with Google" href="auth/google">Login with Google</a>;
             default: return <a href="/api/logout">Logout</a>;

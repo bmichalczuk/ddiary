@@ -14,6 +14,7 @@ const EditorContainer = styled.div`
   justify-content: stretch;
   max-width: 800px;
   border: 1px solid #ddd;
+  color: ${props => props.theme.secondaryColor};
   .DraftEditor-root {
     background-color: #fffef7;
     flex: 1;

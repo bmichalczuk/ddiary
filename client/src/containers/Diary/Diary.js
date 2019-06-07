@@ -17,7 +17,6 @@ export class Diary extends Component {
                 ? <DiaryEntry />
                 : <DiaryEntriesList />
                 }
-                <DiaryEntryForm />
             </section>
         );
     }
