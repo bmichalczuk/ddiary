@@ -1,5 +1,4 @@
 import {FETCH_USER} from "./actionsTypes";
-import {ADD_DIARY_ENTRY} from "./actionsTypes";
 import axios from "axios";
 
 export const fetchUser = () => {
@@ -12,11 +11,3 @@ export const fetchUser = () => {
     }
 };
 
-export const addDiaryEntry = (entry) => {
-    return async dispatch => {
-        dispatch({
-            type: ADD_DIARY_ENTRY,
-            entry
-        });
-    };
-};

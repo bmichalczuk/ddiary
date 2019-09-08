@@ -4,7 +4,12 @@ const theme = {
     thirdColor: "#089DD7",
     fourthColor: "#FF9800",
     textFont: "Roboto",
-    headingFont: "BebasNeue"
+    headingFont: "BebasNeue",
+    breakpoint: {
+        small: "30em",
+        medium: "600px",
+        big: "70em"
+    }
 };
 
 export default theme;

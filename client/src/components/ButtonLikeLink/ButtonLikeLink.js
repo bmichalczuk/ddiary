@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Spinner from "../Spinner/Spinner";
+import {Link} from "react-router-dom";
+
 
 const themes = {
     primary: {
@@ -10,16 +11,16 @@ const themes = {
         hoverBackground: "#FFFFFF"
     },
     danger: {
-        color: "#FFFFFF",
-        background: "#f91b07",
-        hoverColor: "#f91b07",
-        hoverBackground: "#FFFFFF"
+        color: "white",
+        background: "red",
+        hoverColor: "yelow",
+        hoverBackground: "purple"
     }
 };
 
-const StyledButton = styled.button`
-        padding: 1em 1.5em;
-        display: flex;
+const ButtonLikeLink = styled(Link)`
+        padding: .5em 1em;
+        display: inline-flex;
         flex-wrap: nowrap;
         align-content: center;
         align-items: center;
@@ -28,6 +29,8 @@ const StyledButton = styled.button`
         border-radius: 10px;
         text-transform: uppercase;
         text-align: center;
+        text-decoration: none;
+        
         :hover,
         :focus {
             cursor: pointer;
@@ -46,14 +49,18 @@ const StyledButton = styled.button`
                 }
             `;
         }}
+        ${props => {
+            return `
+            @media (min-width: ${props.theme.breakpoint.medium}) {
+            width: 100px;
+            color: black;
+            };
+            `
+            
+        }}
+        
 `;
 
-const Btn = (props) => {
-    if (!props.loading) {
-        return <StyledButton {...props}>{props.children}</StyledButton>;
-    }
-    return <StyledButton {...props}><span>{props.children}</span><Spinner size="15px"/></StyledButton>;
-};
 
 
-export default Btn;
+export default ButtonLikeLink;

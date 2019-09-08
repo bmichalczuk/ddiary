@@ -2,11 +2,12 @@ import React, {Component} from "react";
 import RichTextEditor from "../../components/RichTextEditor/RichTextEditor";
 import axios from "axios";
 import {Formik, Form} from "formik";
-import {EditorState, convertToRaw} from "draft-js";
+import {EditorState, convertToRaw, convertFromRaw, ContentState} from "draft-js";
 import Button from "../../components/Button/Button";
 import styled from "styled-components";
 import {Redirect} from "react-router-dom";
-
+import {fetchUser} from "../../actions";
+import {connect} from "react-redux";
 
 class DiaryEntryForm extends Component {
     constructor(props) {
@@ -16,10 +17,10 @@ class DiaryEntryForm extends Component {
     renderForm = ({entry, className}) => {
         let timestamp;
         let editorState;
-        
         if(entry) {
-            timestamp = entry.timestamp;
-            editorState = entry.editorState;
+            timestamp =  entry.timestamp;
+            editorState = EditorState.createWithContent(entry.editorState);
+            
         } else {
             timestamp = Date.now();
             editorState = EditorState.createEmpty();
@@ -38,8 +39,8 @@ class DiaryEntryForm extends Component {
                         if(res) {
                             actions.setSubmitting(false);
                             this.setState({succes: true});
+
                         }
-                        
                     }
                         
                     }
@@ -52,6 +53,7 @@ class DiaryEntryForm extends Component {
                             <Form>
                                 <RichTextEditor 
                                     timestamp={values.timestamp}
+                                    
                                     editorState={values.editorState}
                                     onChange={setFieldValue}
                                 />
@@ -72,7 +74,7 @@ class DiaryEntryForm extends Component {
     }
     render() {
         if(this.state.succes) {
-            return <Redirect to="/diary" />;
+            return <Redirect to="/" />;
         }
         return this.renderForm(this.props);
   
@@ -92,4 +94,4 @@ const styledDiaryEntryForm = styled(DiaryEntryForm)`
     }
 `;
 
-export default styledDiaryEntryForm;
+export default connect(null, {fetchUser})(styledDiaryEntryForm);
