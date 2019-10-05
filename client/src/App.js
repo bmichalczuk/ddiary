@@ -9,6 +9,15 @@ import Diary from "./containers/Diary/Diary";
 import DiaryNew from "./components/DiaryNew/DiaryNew";
 import {Redirect} from "react-router-dom";
 
+
+
+const DiaryEntryDummy = (props) => {
+    console.log(props.match.params)
+    return (
+        <p>{props.match.params.id}</p>
+    )
+};
+
 class App extends Component {
     componentDidMount() {
         this.props.fetchUser();

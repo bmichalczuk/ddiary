@@ -1,50 +1,35 @@
 import React, {Component} from "react";
 import styled from "styled-components";
 import PropTyes from "prop-types";
-import {connect} from "react-redux";
-import DiaryEntry from "../DiaryEntry/DiaryEntry";
-import {fetchUser} from "../../actions";
 import Spinner from "../Spinner/Spinner";
+import DiaryEntryLink from "../DiaryEntryLink/DiaryEntryLink";
 
-
-export class DiaryEntriesList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {selected: null};
+const DiaryEntriesList = (props) => {
+    if(!props.entriesIdList || props.entriesIdList.length === 0) {
+        return <div>There are no entries yet. Click "New entry" to start your journal!</div>;
     }
-    renderEntries = () => {
-        const entries = Object.values(this.props.auth.data.diary);
-        const sortedEntries = entries.sort((a,b) => a.timestamp > b.timestamp);
-        return ( 
-            <>
-                <ol>
-                    {sortedEntries.map(entry => <DiaryEntry key={entry.timestamp} entry={entry} /> )}
-                </ol>
-            </>
-        );
-    }
-    renderNoEntries = () => {
-        return (
-            <>
-                <div>There are no entries yet. Click "New entry" to start your journal!</div>
-            </>
-        );
-    }
-    render() {
-        if(this.props.auth) {
-            const diaryIsEmpty = Object.keys(this.props.auth.data.diary);
-            return (
-                <>
-                    {diaryIsEmpty.length ? this.renderEntries() : this.renderNoEntries()}
-                </>
-            )
-        } 
-        return <Spinner />;
-    };
+    const {entriesIdList, selectedEntry, selectEntry, className,collapse, hideNav} = props;
+    return (
+            <ol className={className}>
+                {entriesIdList.map(id => {
+                    return (
+                        <li key={id} onClick={() => {selectEntry(id)}} >
+                            <DiaryEntryLink onClick={hideNav} selected={selectedEntry} id={id} />;
+                        </li>
+                    );
+                })}
+            </ol>
+    );
 };
 
+const StyledDiaryEntriesList = styled(DiaryEntriesList)`
+    max-width: 250px;
+    transition: transform .3s ease-in-out;
+    transform: ${props => props.collapse ? "translateX(-250px)" : "translateX(0)"};
+    overflow: hidden;
+    list-style-type: none;
+    ${props => props.collapse && "position: absolute; z-index: 2;"};
+    
+`;
 
-function mapStateToProps({auth}) {
-    return {auth};
-}
-export default connect(mapStateToProps, {fetchUser})(DiaryEntriesList);
+export default StyledDiaryEntriesList;

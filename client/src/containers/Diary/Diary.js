@@ -5,6 +5,10 @@ import DiaryEntriesList from "../../components/DiaryEntriesList/DiaryEntriesList
 import {connect} from "react-redux";
 import ButtonLikeLink from "../../components/ButtonLikeLink/ButtonLikeLink";
 import {fetchUser} from "../../actions/index";
+import {Link} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import DiaryEditEntry from "../DiaryEditEntry/DiaryEditEntry";
+import DiaryNav from "../../components/DiaryNav/DiaryNav";
 
 export class Diary extends Component {
     constructor(props) {
@@ -14,15 +18,34 @@ export class Diary extends Component {
     componentDidMount() {
         this.props.fetchUser();
     }
+    selectEntry = (id) => {
+        console.log("fasdf");
+        this.setState({selectedEntry: id});
+    };
     render() {
-        console.log(this.props.auth);
+        if(this.props.auth === null || this.props.auth === undefined) {
+            return (
+                <p>waiitt</p>
+            );
+        }
+        const entriesIdList = Object.keys(this.props.auth.data.diary);
         return (
             <section className={this.props.className}>
                 <ButtonLikeLink to="/diary/new">New entry</ButtonLikeLink>
-                {this.state.selectedEntry 
-                ? <DiaryEntry />
-                : <DiaryEntriesList />
-                }
+                <Router>
+                    <DiaryWrapper>
+                        <DiaryNav
+                            selectedEntry={this.state.selectedEntry} 
+                            selectEntry={this.selectEntry} 
+                            entriesIdList={entriesIdList}
+                        />
+                        <EntryContainer>
+                            <Route path="/diary/entry/:id"  component={DiaryEntry} />
+                            <Route path="/diary/edit/:id" component={DiaryEditEntry} />
+                        </EntryContainer>
+                    </DiaryWrapper>
+                </Router>
+                
             </section>
         );
     }
@@ -31,12 +54,17 @@ export class Diary extends Component {
 const StyledDiary = styled(Diary)`
     background-color: inherit;
     color: black;
-    max-width: 400px;
-    border: 1px solid red;
     position: relative;
     display: flex;
     flex-direction: column;
 `;
+const DiaryWrapper = styled.div`
+    display: flex;
+`;
+const EntryContainer = styled.div`
+    flex: 1;
+`;
+
 
 function mapStateToProps({auth}) {
     return {auth};

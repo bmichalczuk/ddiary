@@ -1,4 +1,4 @@
-import {FETCH_USER} from "./actionsTypes";
+import {FETCH_USER, UPDATE_USER} from "./actionsTypes";
 import axios from "axios";
 
 export const fetchUser = () => {
@@ -10,4 +10,11 @@ export const fetchUser = () => {
         });
     }
 };
+
+export const updateUser = (user) => {
+    return {
+        type: UPDATE_USER,
+        user
+    }
+}
 

@@ -15,6 +15,7 @@ class DiaryEntryForm extends Component {
         this.state = {succes: false};
     }
     renderForm = ({entry, className}) => {
+         console.log(entry);
         let timestamp;
         let editorState;
         if(entry) {
@@ -39,10 +40,9 @@ class DiaryEntryForm extends Component {
                         if(res) {
                             actions.setSubmitting(false);
                             this.setState({succes: true});
-
+                            this.props.fetchUser();
                         }
                     }
-                        
                     }
                 >
                     {({values, isSubmitting, setFieldValue}) => {
@@ -57,7 +57,6 @@ class DiaryEntryForm extends Component {
                                     editorState={values.editorState}
                                     onChange={setFieldValue}
                                 />
-                               
                                 <Button  
                                     title="Submit"
                                     loading={isSubmitting} 
@@ -74,14 +73,15 @@ class DiaryEntryForm extends Component {
     }
     render() {
         if(this.state.succes) {
-            return <Redirect to="/" />;
+            if(this.props.entry) {
+                const timestamp = this.props.entry.timestamp;
+                return <Redirect to={`/diary/entry/${timestamp}`} />;
+            }
+            return <Redirect to={`/`} />;
         }
         return this.renderForm(this.props);
-  
     }
 };
-
-
 
 const styledDiaryEntryForm = styled(DiaryEntryForm)`
     form {
