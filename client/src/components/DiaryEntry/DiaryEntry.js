@@ -7,6 +7,8 @@ import axios from "axios";
 import {Redirect} from "react-router-dom";
 import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
 import {connect} from "react-redux";
+import {fetchUser} from "../../actions";
+
 const CancelButton = styled(Button)`
     width: 30px;
     height: 30px;
@@ -15,7 +17,7 @@ const CancelButton = styled(Button)`
     justify-content: center;
     align-items: center;
 
-`
+`;
 
 class DiaryEntry extends Component {
     constructor(props) {
@@ -33,6 +35,7 @@ class DiaryEntry extends Component {
     removeDiaryEntry = async () => {
         this.setState({removing: true});
         await axios.delete(`/api/diary/${this.props.diaryEntry.timestamp}`);
+        await this.props.fetchUser();
         this.setState({exists: false, removing: false});
     }
     renderEditMode = () => {
@@ -63,7 +66,6 @@ class DiaryEntry extends Component {
                 <p>fdaf</p>
             );
         }
-        console.log(this.props.diaryEntry);
         const {id} =this.props.match.params;
         const entry = this.props.diaryEntry
         const {timestamp} = entry;
@@ -93,7 +95,7 @@ class DiaryEntry extends Component {
             </article>
         );
     }
-}
+};
 
 const StyledDiaryEntry = styled(DiaryEntry)`
     border: 3px solid green;
@@ -108,4 +110,4 @@ function mapStateToProps({auth}, ownProps) {
     }
 };
 
-export default connect(mapStateToProps)(StyledDiaryEntry);
+export default connect(mapStateToProps, {fetchUser})(StyledDiaryEntry);

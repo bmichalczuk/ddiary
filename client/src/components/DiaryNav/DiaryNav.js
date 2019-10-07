@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import styled from "styled-components";
 import DiaryEntriesList from "../DiaryEntriesList/DiaryEntriesList";
 import HamburgerButton from "../HamburgerButton/HamburgerButton";
-
+import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
 
 class DiaryNav extends Component {
     state = {navActive: false};
@@ -21,8 +21,9 @@ class DiaryNav extends Component {
         }
         return (
             <Nav navActive={this.state.navActive} className={this.props.clasName}>
+                
                 <HamburgerButton active={this.state.navActive} onClick={this.toggleNavActive} />
-           
+                
                 <DiaryEntriesList 
                     selectedEntry={selectedEntry} 
                     selectEntry={selectEntry} 

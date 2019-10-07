@@ -19,9 +19,8 @@ export class Diary extends Component {
         this.props.fetchUser();
     }
     selectEntry = (id) => {
-        console.log("fasdf");
         this.setState({selectedEntry: id});
-    };
+    }
     render() {
         if(this.props.auth === null || this.props.auth === undefined) {
             return (
@@ -31,20 +30,23 @@ export class Diary extends Component {
         const entriesIdList = Object.keys(this.props.auth.data.diary);
         return (
             <section className={this.props.className}>
-                <ButtonLikeLink to="/diary/new">New entry</ButtonLikeLink>
-                <Router>
+                   <ButtonLikeLink onClick={this.hideNav} to="/diary/new">New entry</ButtonLikeLink>
                     <DiaryWrapper>
-                        <DiaryNav
-                            selectedEntry={this.state.selectedEntry} 
-                            selectEntry={this.selectEntry} 
-                            entriesIdList={entriesIdList}
-                        />
-                        <EntryContainer>
-                            <Route path="/diary/entry/:id"  component={DiaryEntry} />
-                            <Route path="/diary/edit/:id" component={DiaryEditEntry} />
-                        </EntryContainer>
+                        <Router>
+                            <>
+                            <DiaryNav
+                                selectedEntry={this.state.selectedEntry} 
+                                selectEntry={this.selectEntry} 
+                                entriesIdList={entriesIdList}
+                            />
+                            <EntryContainer>
+                                <Route path="/diary/entry/:id"  component={DiaryEntry} />
+                                <Route path="/diary/edit/:id" component={DiaryEditEntry} />
+                            </EntryContainer>
+                            </>
+                        </Router>
                     </DiaryWrapper>
-                </Router>
+                
                 
             </section>
         );
