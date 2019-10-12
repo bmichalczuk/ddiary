@@ -21,6 +21,9 @@ const StyledHamburgerButton = styled(HamburgerButton)`
     cursor: pointer;
     transition: transform .2s .1s ease-in-out;
     ${props => props.active && "transform: translateX(200px);"}
+    @media (min-width: ${props => props.theme.breakpoint.small}) {
+      display: none;
+    }
     .hamburger-box {
       width: 35px;
       height: 24px;

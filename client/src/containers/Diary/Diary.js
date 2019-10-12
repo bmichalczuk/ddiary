@@ -15,9 +15,6 @@ export class Diary extends Component {
         super(props);
         this.state = {selectedEntry: null};
     }
-    componentDidMount() {
-        this.props.fetchUser();
-    }
     selectEntry = (id) => {
         this.setState({selectedEntry: id});
     }
@@ -31,9 +28,10 @@ export class Diary extends Component {
         return (
             <section className={this.props.className}>
                    <ButtonLikeLink onClick={this.hideNav} to="/diary/new">New entry</ButtonLikeLink>
-                    <DiaryWrapper>
+                    
                         <Router>
-                            <>
+                           
+                            <DiaryWrapper>
                             <DiaryNav
                                 selectedEntry={this.state.selectedEntry} 
                                 selectEntry={this.selectEntry} 
@@ -43,9 +41,10 @@ export class Diary extends Component {
                                 <Route path="/diary/entry/:id"  component={DiaryEntry} />
                                 <Route path="/diary/edit/:id" component={DiaryEditEntry} />
                             </EntryContainer>
-                            </>
+                           
+                            
+                            </DiaryWrapper>
                         </Router>
-                    </DiaryWrapper>
                 
                 
             </section>
@@ -59,12 +58,21 @@ const StyledDiary = styled(Diary)`
     position: relative;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 `;
 const DiaryWrapper = styled.div`
     display: flex;
+    flex-direction: column;
+    background: red;
+    width: 100%;
+    flex: 1;
+    @media (min-width: ${({theme}) => theme.breakpoint.medium}) {
+        flex-direction: row;
+    }
 `;
 const EntryContainer = styled.div`
     flex: 1;
+    background: olive;
 `;
 
 

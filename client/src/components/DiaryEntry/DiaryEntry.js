@@ -23,14 +23,9 @@ class DiaryEntry extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editMode: false,
             exists: true,
             removing: false
         };
-    }
-    cancelEditMode = () => this.setState({editMode: false});
-    switchEditMode = () => {
-        this.setState((prevState, props) => ({editMode: !prevState.editMode}));
     }
     removeDiaryEntry = async () => {
         this.setState({removing: true});
@@ -38,29 +33,10 @@ class DiaryEntry extends Component {
         await this.props.fetchUser();
         this.setState({exists: false, removing: false});
     }
-    renderEditMode = () => {
-        if(this.props.diaryEntry === null || this.props.diaryEntry === undefined) {
-            return <p>terefer</p>;
+    render() {
+        if(!this.state.exists) {
+            return <Redirect to="/" />
         }
-        
-        let {timestamp, editorState} = this.props.diaryEntry;
-    
-        const { className} = this.props;
-        
-        const date = new Date(timestamp);
-        //const editorState = convertFromRaw(editorState);
-        const heading = date.toLocaleDateString();
-        const entry = {timestamp, editorState: convertFromRaw(editorState)};
-        return (
-            <div>
-                terefere
-                
-                <DiaryEntryForm entry={entry} /> 
-            </div>
-            
-        );
-    }
-    renderReadMode = () => {
         if(this.props.diaryEntry === null || this.props.diaryEntry === undefined) {
             return (
                 <p>fdaf</p>
@@ -75,25 +51,13 @@ class DiaryEntry extends Component {
         const heading = date.toLocaleDateString();
 
         return (
-            <>
+            <article className={this.props.className}>
                 <h2>{heading}</h2>
                 <Editor editorState={EditorState.createWithContent(editorState)} onChange={() => undefined} />
                 <Button loading={this.state.removing} title="Remove entry" btnTheme="danger" onClick={this.removeDiaryEntry}>Delete</Button>
-                <Button onClick={() => this.setState({editMode: true})}>edit</Button>
                 <ButtonLikeLink to={`/diary/edit/${id}`}>Edit ext</ButtonLikeLink>
-            </>
-        )
-    }
-    render() {
-        if(!this.state.exists) {
-            return <Redirect to="/" />
-        }
-        
-        return (
-            <article className={this.props.className}>
-                {this.state.editMode ? this.renderEditMode() : this.renderReadMode()}
             </article>
-        );
+        )
     }
 };
 
@@ -101,6 +65,7 @@ const StyledDiaryEntry = styled(DiaryEntry)`
     border: 3px solid green;
     margin: 3px auto;
     color: #000000;
+    width: 100%;
 `;
 
 function mapStateToProps({auth}, ownProps) {

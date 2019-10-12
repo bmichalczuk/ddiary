@@ -23,13 +23,26 @@ const DiaryEntriesList = (props) => {
 };
 
 const StyledDiaryEntriesList = styled(DiaryEntriesList)`
-    max-width: 250px;
+    padding: 10px 5px;
     transition: transform .3s ease-in-out;
     transform: ${props => props.collapse ? "translateX(-250px)" : "translateX(0)"};
     overflow: hidden;
     list-style-type: none;
+    max-width: 280px;
     ${props => props.collapse && "position: absolute; z-index: 2;"};
-    
+    @media (min-width: ${props => props.theme.breakpoint.small}) {
+        transform: translateX(0);
+        position: static;
+        z-index: 0;
+    }
+    @media (min-width: ${props => props.theme.breakpoint.medium}) {
+       
+        background: orange;
+    }
+    @media (min-width: ${props => props.theme.breakpoint.big}) {
+   
+        background: red;
+    }
 `;
 
 export default StyledDiaryEntriesList;

@@ -4,6 +4,7 @@ import DiaryEntriesList from "../DiaryEntriesList/DiaryEntriesList";
 import HamburgerButton from "../HamburgerButton/HamburgerButton";
 import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
 
+
 class DiaryNav extends Component {
     state = {navActive: false};
     toggleNavActive = () => {
@@ -20,10 +21,8 @@ class DiaryNav extends Component {
             return <div>There are no entries yet. Click "New entry" to start your journal!</div>;
         }
         return (
-            <Nav navActive={this.state.navActive} className={this.props.clasName}>
-                
+            <Nav navActive={this.state.navActive} className={this.props.clasName}>             
                 <HamburgerButton active={this.state.navActive} onClick={this.toggleNavActive} />
-                
                 <DiaryEntriesList 
                     selectedEntry={selectedEntry} 
                     selectEntry={selectEntry} 
@@ -37,13 +36,19 @@ class DiaryNav extends Component {
 };
 
 const Nav = styled.nav`
-    ${props => props.navActive && 
-        `position: absolute; 
-         z-index: 2;
-         width: 100%;
-         background: white;
-         min-height: 100vh;`
-        }
+    padding-top: 10px; 
+    background: ${props =>  "yellow" || props.theme.primaryColor };
+    z-index: 2;
+    width: ${({navActive}) => navActive && "100%"};
+    min-height: ${({navActive}) => navActive && "100vh"};
+    position: ${({navActive}) => navActive && "absolute"};
+    @media (min-width: ${props => props.theme.breakpoint.small}) {
+        max-width: ${props => props.theme.breakpoint.small};
+        position: static;
+        z-index: 0;
+        max-width: 150px;
+    }
+    
 `;
 const StyledDiaryNav = styled(DiaryNav)`
 

@@ -11,13 +11,15 @@ const DiaryEntryLink = (props) => {
 };
 
 const StyledEntryLink = styled(DiaryEntryLink)`
-    background-color: ${props => props.selected === props.id ? "red": "gred"};
-    padding: 1em 2em;
+    background-color: ${props => props.selected === props.id ? props.theme.col: "gred"};
+    padding: .6em 1em;
     border: 1px solid #a7b0af;
     box-shadow: 1px 2px 1px -1px #a7b0af;
     display: flex;
-    color: red;
-    margin: 10px auto;
+    background: blue;
+    margin: 2px;
+    text-align: center;
+    text-decoration: none;
 `;
 
 

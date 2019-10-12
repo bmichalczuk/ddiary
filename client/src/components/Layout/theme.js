@@ -6,8 +6,8 @@ const theme = {
     textFont: "Roboto",
     headingFont: "BebasNeue",
     breakpoint: {
-        small: "30em",
-        medium: "600px",
+        small: "460px",
+        medium: "680px",
         big: "70em"
     }
 };
