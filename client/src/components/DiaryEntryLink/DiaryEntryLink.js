@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {convertSecondsToReadableDate} from "../../helpers/convertDate";
+import theme from "../Layout/theme";
 
 
 const DiaryEntryLink = (props) => {
@@ -11,13 +12,14 @@ const DiaryEntryLink = (props) => {
 };
 
 const StyledEntryLink = styled(DiaryEntryLink)`
-    background-color: ${props => props.selected === props.id ? props.theme.col: "gred"};
+    background-color: ${({selected, id, theme}) => selected === id ? theme.secondaryColor : theme.thirdColor};
     padding: .6em 1em;
     border: 1px solid #a7b0af;
+    border-radius: 5px;
     box-shadow: 1px 2px 1px -1px #a7b0af;
     display: flex;
-    background: blue;
-    margin: 2px;
+    color: ${({theme:{primaryColor}}) => primaryColor};
+    margin: 10px;
     text-align: center;
     text-decoration: none;
 `;

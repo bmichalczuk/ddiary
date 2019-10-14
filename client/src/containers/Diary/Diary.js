@@ -63,16 +63,16 @@ const StyledDiary = styled(Diary)`
 const DiaryWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    background: red;
     width: 100%;
     flex: 1;
+    
     @media (min-width: ${({theme}) => theme.breakpoint.medium}) {
         flex-direction: row;
+        flex-wrap: nowrap;
     }
 `;
 const EntryContainer = styled.div`
     flex: 1;
-    background: olive;
 `;
 
 

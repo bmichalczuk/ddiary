@@ -14,7 +14,7 @@ const DiaryEntriesList = (props) => {
                 {entriesIdList.map(id => {
                     return (
                         <li key={id} onClick={() => {selectEntry(id)}} >
-                            <DiaryEntryLink onClick={hideNav} selected={selectedEntry} id={id} />;
+                            <DiaryEntryLink onClick={hideNav} selected={selectedEntry} id={id} />
                         </li>
                     );
                 })}
@@ -23,7 +23,7 @@ const DiaryEntriesList = (props) => {
 };
 
 const StyledDiaryEntriesList = styled(DiaryEntriesList)`
-    padding: 10px 5px;
+    padding: 10px;
     transition: transform .3s ease-in-out;
     transform: ${props => props.collapse ? "translateX(-250px)" : "translateX(0)"};
     overflow: hidden;
@@ -36,11 +36,9 @@ const StyledDiaryEntriesList = styled(DiaryEntriesList)`
         z-index: 0;
     }
     @media (min-width: ${props => props.theme.breakpoint.medium}) {
-       
         background: orange;
     }
     @media (min-width: ${props => props.theme.breakpoint.big}) {
-   
         background: red;
     }
 `;

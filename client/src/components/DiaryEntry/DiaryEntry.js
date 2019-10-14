@@ -20,19 +20,18 @@ const CancelButton = styled(Button)`
 `;
 
 class DiaryEntry extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            exists: true,
-            removing: false
-        };
-    }
+    state = {
+        exists: true,
+        removing: false
+    };
+
     removeDiaryEntry = async () => {
         this.setState({removing: true});
         await axios.delete(`/api/diary/${this.props.diaryEntry.timestamp}`);
         await this.props.fetchUser();
         this.setState({exists: false, removing: false});
     }
+
     render() {
         if(!this.state.exists) {
             return <Redirect to="/" />
@@ -54,8 +53,11 @@ class DiaryEntry extends Component {
             <article className={this.props.className}>
                 <h2>{heading}</h2>
                 <Editor editorState={EditorState.createWithContent(editorState)} onChange={() => undefined} />
-                <Button loading={this.state.removing} title="Remove entry" btnTheme="danger" onClick={this.removeDiaryEntry}>Delete</Button>
-                <ButtonLikeLink to={`/diary/edit/${id}`}>Edit ext</ButtonLikeLink>
+                <div className="DiaryEntry__btns">
+                    <Button loading={this.state.removing} title="Remove entry" btnTheme="danger" onClick={this.removeDiaryEntry}>Delete</Button>
+                    <ButtonLikeLink to={`/diary/edit/${id}`}>Edit ext</ButtonLikeLink>
+                </div>
+                
             </article>
         )
     }
@@ -65,7 +67,17 @@ const StyledDiaryEntry = styled(DiaryEntry)`
     border: 3px solid green;
     margin: 3px auto;
     color: #000000;
-    width: 100%;
+    padding: 5px 20px 0;
+    font-size: 1em;
+    h2 {
+        text-align: center;
+        border-bottom: 1px dotted ${({theme: {secondaryColor}}) => secondaryColor};
+        margin-bottom: 10px;
+    }
+    .DiaryEntry__btns {
+        display: flex;
+        padding-top: 15px;
+    }
 `;
 
 function mapStateToProps({auth}, ownProps) {

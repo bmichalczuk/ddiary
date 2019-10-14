@@ -21,7 +21,7 @@ class DiaryNav extends Component {
             return <div>There are no entries yet. Click "New entry" to start your journal!</div>;
         }
         return (
-            <Nav navActive={this.state.navActive} className={this.props.clasName}>             
+            <Nav navActive={this.state.navActive} className={this.props.className}>             
                 <HamburgerButton active={this.state.navActive} onClick={this.toggleNavActive} />
                 <DiaryEntriesList 
                     selectedEntry={selectedEntry} 
@@ -36,17 +36,20 @@ class DiaryNav extends Component {
 };
 
 const Nav = styled.nav`
+    --red: "red";
+    --small: ${props => props.theme.breakpoint.small};
     padding-top: 10px; 
-    background: ${props =>  "yellow" || props.theme.primaryColor };
+    background: ${({theme: {primaryColor}}) => primaryColor };
     z-index: 2;
     width: ${({navActive}) => navActive && "100%"};
     min-height: ${({navActive}) => navActive && "100vh"};
     position: ${({navActive}) => navActive && "absolute"};
-    @media (min-width: ${props => props.theme.breakpoint.small}) {
-        max-width: ${props => props.theme.breakpoint.small};
+    @media (min-width: var(--small)) {
+        max-width: ${({theme}) => theme.breakpoint.small};
         position: static;
         z-index: 0;
         max-width: 150px;
+        background: red;
     }
     
 `;
@@ -55,4 +58,4 @@ const StyledDiaryNav = styled(DiaryNav)`
 
 `;
 
-export default StyledDiaryNav;
+export default DiaryNav;

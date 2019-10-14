@@ -10,10 +10,8 @@ import {fetchUser} from "../../actions";
 import {connect} from "react-redux";
 
 class DiaryEntryForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {succes: false};
-    }
+    state = {succes: false};
+
     renderForm = ({entry, className}) => {
          console.log(entry);
         let timestamp;
