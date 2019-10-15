@@ -15,12 +15,13 @@ const HamburgerButton = (props) => {
 
 const StyledHamburgerButton = styled(HamburgerButton)`
     border: none;
-    margin: 0;
+    display: block;
+    margin: ${({active}) => active ? "0 10px 0 80%" : "0px"};
     padding: 10px;
     background-color: transparent;
     cursor: pointer;
-    transition: transform .2s .1s ease-in-out;
-    ${props => props.active && "transform: translateX(200px);"}
+    transition:.2s .1s ease-in-out;
+    /*${props => props.active && "transform: translateX(200px);"}*/
     @media (min-width: ${props => props.theme.breakpoint.small}) {
       display: none;
     }

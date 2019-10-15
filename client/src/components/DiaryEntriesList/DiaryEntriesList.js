@@ -28,7 +28,6 @@ const StyledDiaryEntriesList = styled(DiaryEntriesList)`
     transform: ${props => props.collapse ? "translateX(-250px)" : "translateX(0)"};
     overflow: hidden;
     list-style-type: none;
-    max-width: 280px;
     ${props => props.collapse && "position: absolute; z-index: 2;"};
     @media (min-width: ${props => props.theme.breakpoint.small}) {
         transform: translateX(0);
