@@ -13,8 +13,8 @@ const DiaryEntriesList = (props) => {
             <ol className={className}>
                 {entriesIdList.map(id => {
                     return (
-                        <li key={id} onClick={() => {selectEntry(id)}} >
-                            <DiaryEntryLink onClick={hideNav} selected={selectedEntry} id={id} />
+                        <li key={id} onClick={selectEntry.bind(this, id)} >
+                            <DiaryEntryLink onClick={hideNav} active={selectedEntry === id} id={id} />
                         </li>
                     );
                 })}
