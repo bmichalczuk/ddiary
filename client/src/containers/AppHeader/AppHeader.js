@@ -12,8 +12,7 @@ export const AppHeader = (props) => {
             case false: 
                 return <a title="Login with Google" href="auth/google">Login with Google</a>;
             default: return <a href="/api/logout">Logout</a>;
-        }
-            
+        }   
     }
     return (
         <header className={props.className}>
@@ -26,18 +25,19 @@ export const AppHeader = (props) => {
             <div>
                 {renderAuthStatus() }
             </div>
-            
         </header>
     );
 };
 
 
 const styledAppHeader = styled(AppHeader)`
+    box-shadow: inset 0 -5px ${({theme: {fourthColor}})  => fourthColor};
     min-height: 5em;
     display: flex;
     justify-content: space-between;
     align-content: stretch;
     background-color: ${props => props.theme.secondaryColor};
+    margin-bottom: 10px;
     h1 {
         margin-left: 1em;
         display: flex;

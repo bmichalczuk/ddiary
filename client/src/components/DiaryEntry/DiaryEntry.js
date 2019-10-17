@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import styled from "styled-components";
 import {Editor, EditorState, convertFromRaw} from "draft-js"
 import Button from "../Button/Button";
-import DiaryEntryForm from "../../containers/DiaryEntryForm/DiaryEntryForm";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
@@ -31,7 +30,7 @@ class DiaryEntry extends Component {
         await this.props.fetchUser();
         this.setState({exists: false, removing: false});
     }
-
+    disableEditor = () => undefined
     render() {
         if(!this.state.exists) {
             return <Redirect to="/" />
@@ -52,7 +51,10 @@ class DiaryEntry extends Component {
         return (
             <article className={this.props.className}>
                 <h2>{heading}</h2>
-                <Editor editorState={EditorState.createWithContent(editorState)} onChange={() => undefined} />
+              
+                <Editor className="DiaryEntry__editor" editorState={EditorState.createWithContent(editorState)} onChange={this.disableEditor} />
+               
+                
                 <div className="DiaryEntry__btns">
                     <Button loading={this.state.removing} title="Remove entry" btnTheme="danger" onClick={this.removeDiaryEntry}>Delete</Button>
                     <ButtonLikeLink to={`/diary/edit/${id}`}>Edit ext</ButtonLikeLink>
@@ -64,12 +66,12 @@ class DiaryEntry extends Component {
 };
 
 const StyledDiaryEntry = styled(DiaryEntry)`
-    border: 3px solid green;
     margin: 3px auto;
     color: #000000;
     padding: 5px 20px 0;
-    font-size: 1em;
-    h2 {
+    display: flex;
+    flex-direction: column;
+    > h2 {
         text-align: center;
         border-bottom: 1px dotted ${({theme: {secondaryColor}}) => secondaryColor};
         margin-bottom: 10px;
@@ -77,6 +79,20 @@ const StyledDiaryEntry = styled(DiaryEntry)`
     .DiaryEntry__btns {
         display: flex;
         padding-top: 15px;
+    }
+    .DraftEditor-root {
+    background-color: #fffef7;
+    flex: 1;
+    width: 100%;
+    padding: 10px;
+    background: pink;
+    min-height: 60vh;
+    }
+    .blockquote {
+        font-family: 'Hoefler Text', Georgia, serif;
+        font-style: italic;
+        border-left: solid #EEEEEE 5px;
+        padding: 10px;
     }
 `;
 

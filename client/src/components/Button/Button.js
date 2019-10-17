@@ -28,6 +28,8 @@ const StyledButton = styled.button`
         border-radius: 10px;
         text-transform: uppercase;
         text-align: center;
+        font-weight: bold;
+        letter-spacing: 1px;
         :hover,
         :focus {
             cursor: pointer;
