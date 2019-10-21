@@ -11,9 +11,7 @@ import {connect} from "react-redux";
 
 class DiaryEntryForm extends Component {
     state = {succes: false};
-
     renderForm = ({entry, className}) => {
-         console.log(entry);
         let timestamp;
         let editorState;
         if(entry) {
