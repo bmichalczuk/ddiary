@@ -8,9 +8,19 @@ import styled from "styled-components";
 import {Redirect} from "react-router-dom";
 import {fetchUser} from "../../actions";
 import {connect} from "react-redux";
+import FlashMessage from "../../components/FlashMessage/FlashMessage";
+
+const Warning = styled.div`
+    color: red;
+    text-align: center;
+    font-weight: bold;
+`;
 
 class DiaryEntryForm extends Component {
-    state = {succes: false};
+    state = {
+        succes: false, 
+        error: ""};
+    checkIfEmpty = (currentContent) => !currentContent.hasText() || currentContent.getPlainText() === "";
     renderForm = ({entry, className}) => {
         let timestamp;
         let editorState;
@@ -30,14 +40,26 @@ class DiaryEntryForm extends Component {
                         editorState
                     }}
                     onSubmit = {async (values, actions) => {
+                        this.state.error && this.setState({error: ""});
                         const {timestamp, editorState} = values;
-                        const state = await convertToRaw(editorState.getCurrentContent());
-                        const res = await axios.post("/api/diary", {timestamp, editorState: state });
-                        if(res) {
+                        const currentContent = editorState.getCurrentContent();
+                        const allowSubmit = !this.checkIfEmpty(currentContent);
+                        try {
+                            if(!allowSubmit) {
+                                throw new Error("You can't submit empty form");
+                            } 
+                                const state = await convertToRaw(currentContent)
+                                const res = await axios.post("/api/diary", {timestamp, editorState: state });
+                                if(res) {
+                                    actions.setSubmitting(false);
+                                    this.setState({succes: true});
+                                    this.props.fetchUser();
+                                }
+                        } catch(e) {
+                            this.setState({error: e.message});
                             actions.setSubmitting(false);
-                            this.setState({succes: true});
-                            this.props.fetchUser();
                         }
+                       
                     }
                     }
                 >
@@ -52,7 +74,9 @@ class DiaryEntryForm extends Component {
                                     
                                     editorState={values.editorState}
                                     onChange={setFieldValue}
+                                    onKeyDown={() => this.setState({error: ""})}
                                 />
+                                {this.state.error && <Warning>{this.state.error}</Warning> }
                                 <Button  
                                     title="Submit"
                                     loading={isSubmitting} 
@@ -82,11 +106,11 @@ class DiaryEntryForm extends Component {
 const styledDiaryEntryForm = styled(DiaryEntryForm)`
     form {
         max-width: 800px;
-        background: pink;
     }
     form > button {
-        float: right;
         margin-top: .5em;
+        margin-left: auto;
+        margin-right:10px;
     }
 `;
 

@@ -52,8 +52,8 @@ class DiaryEntry extends Component {
             <div className={this.props.className}>
                 <h2>{heading}</h2>
                 <TextEditor
-                editorState={EditorState.createWithContent(editorState)}
-                readOnly={true}
+                    editorState={EditorState.createWithContent(editorState)}
+                    readOnly={true}
                 />          
                 <div className="DiaryEntry__btns">
                     <Button loading={this.state.removing} title="Remove entry" btnTheme="danger" onClick={this.removeDiaryEntry}>Delete</Button>
@@ -65,14 +65,12 @@ class DiaryEntry extends Component {
 };
 
 const StyledDiaryEntry = styled(DiaryEntry)`
-    
     color: #000000;
     display: flex;
     flex-direction: column;
     padding: 5px;
     > h2 {
         text-align: center;
-        border-bottom: 1px dotted ${({theme: {secondaryColor}}) => secondaryColor};
         margin-bottom: 10px;
     }
     .DiaryEntry__btns {
