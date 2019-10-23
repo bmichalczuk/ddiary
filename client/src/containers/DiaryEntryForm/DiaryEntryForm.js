@@ -17,9 +17,7 @@ const Warning = styled.div`
 `;
 
 class DiaryEntryForm extends Component {
-    state = {
-        succes: false, 
-        error: ""};
+    state = {succes: false};
     checkIfEmpty = (currentContent) => !currentContent.hasText() || currentContent.getPlainText() === "";
     renderForm = ({entry, className}) => {
         let timestamp;
@@ -39,34 +37,32 @@ class DiaryEntryForm extends Component {
                         timestamp,
                         editorState
                     }}
+                    validate={values => {
+                        let errors = {};
+                        const currentContent = values.editorState.getCurrentContent();
+                        if(this.checkIfEmpty(currentContent)) {
+                            errors.entry = "Your entry is empty! Type something in ;)";
+                        }
+                        return errors;
+                    }}
                     onSubmit = {async (values, actions) => {
-                        this.state.error && this.setState({error: ""});
                         const {timestamp, editorState} = values;
                         const currentContent = editorState.getCurrentContent();
-                        const allowSubmit = !this.checkIfEmpty(currentContent);
-                        try {
-                            if(!allowSubmit) {
-                                throw new Error("You can't submit empty form");
-                            } 
-                                const state = await convertToRaw(currentContent)
-                                const res = await axios.post("/api/diary", {timestamp, editorState: state });
-                                if(res) {
-                                    actions.setSubmitting(false);
-                                    this.setState({succes: true});
-                                    this.props.fetchUser();
-                                }
-                        } catch(e) {
-                            this.setState({error: e.message});
+                        const state = await convertToRaw(currentContent)
+                        const res = await axios.post("/api/diary", {timestamp, editorState: state });
+                        if(res) {
                             actions.setSubmitting(false);
+                            this.setState({succes: true});
+                            this.props.fetchUser();
                         }
-                       
                     }
                     }
                 >
-                    {({values, isSubmitting, setFieldValue}) => {
+                    {({values, touched, errors, isSubmitting, setFieldValue}) => {
                         if(values.redirect) {
                             return <Redirect to="/" />;
                         }
+                        console.log(touched);
                         return (
                             <Form>
                                 <RichTextEditor 
@@ -74,9 +70,8 @@ class DiaryEntryForm extends Component {
                                     
                                     editorState={values.editorState}
                                     onChange={setFieldValue}
-                                    onKeyDown={() => this.setState({error: ""})}
                                 />
-                                {this.state.error && <Warning>{this.state.error}</Warning> }
+                                {errors.entry && <Warning>{errors.entry}</Warning>}
                                 <Button  
                                     title="Submit"
                                     loading={isSubmitting} 
@@ -84,6 +79,7 @@ class DiaryEntryForm extends Component {
                                     btnTheme="primary">
                                     Submit
                                 </Button>
+                            
                             </Form>
                         );
                     }}
