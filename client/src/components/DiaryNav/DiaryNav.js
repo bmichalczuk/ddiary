@@ -42,7 +42,6 @@ const Nav = styled.nav`
     background: ${({theme: {primaryColor}}) => primaryColor };
     z-index: 2;
     width: ${({navActive}) => navActive && "100%"};
-    min-height: ${({navActive}) => navActive && "100vh"};
     position: ${({navActive}) => navActive && "absolute"};
     @media (min-width: var(--small)) {
         max-width: ${({theme}) => theme.breakpoint.small};

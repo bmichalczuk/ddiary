@@ -26,8 +26,9 @@ const StyledDiaryEntriesList = styled(DiaryEntriesList)`
     padding: 10px;
     transition: transform .3s ease-in-out;
     transform: ${props => props.collapse ? "translateX(-250px)" : "translateX(0)"};
-    overflow: hidden;
+    overflow: scroll;
     list-style-type: none;
+    height: 100vh;
     ${props => props.collapse && "position: absolute; z-index: 2;"};
     @media (min-width: ${props => props.theme.breakpoint.small}) {
         transform: translateX(0);

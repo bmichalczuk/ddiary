@@ -8,6 +8,7 @@ import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
 import {connect} from "react-redux";
 import {fetchUser} from "../../actions";
 import TextEditor from "../TextEditor/TextEditor";
+import SubHeading from "../SubHeading/SubHeading";
 
 const CancelButton = styled(Button)`
     width: 30px;
@@ -50,7 +51,7 @@ class DiaryEntry extends Component {
 
         return (
             <div className={this.props.className}>
-                <h2>{heading}</h2>
+                <SubHeading>{heading}</SubHeading>
                 <TextEditor
                     editorState={EditorState.createWithContent(editorState)}
                     readOnly={true}
@@ -69,10 +70,6 @@ const StyledDiaryEntry = styled(DiaryEntry)`
     display: flex;
     flex-direction: column;
     padding: 5px;
-    > h2 {
-        text-align: center;
-        margin-bottom: 10px;
-    }
     .DiaryEntry__btns {
         display: flex;
         padding-top: 15px;

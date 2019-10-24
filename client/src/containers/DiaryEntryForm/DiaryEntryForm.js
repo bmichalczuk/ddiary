@@ -8,7 +8,6 @@ import styled from "styled-components";
 import {Redirect} from "react-router-dom";
 import {fetchUser} from "../../actions";
 import {connect} from "react-redux";
-import FlashMessage from "../../components/FlashMessage/FlashMessage";
 
 const Warning = styled.div`
     color: red;
@@ -62,7 +61,6 @@ class DiaryEntryForm extends Component {
                         if(values.redirect) {
                             return <Redirect to="/" />;
                         }
-                        console.log(touched);
                         return (
                             <Form>
                                 <RichTextEditor 

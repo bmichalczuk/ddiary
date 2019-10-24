@@ -6,11 +6,12 @@ import Toolbar from "./RichTextEditorToolbar";
 const RichTextEditor = (props) => {
   const {editorState, toggleBlockType, toggleInlineStyle} = props;
   const renderToolbar = (toggleInlineStyle, toggleBlockType, editorState) => (
-  <Toolbar 
-    editorState={editorState} 
-    toggleBlockType={toggleBlockType} 
-    toggleInlineStyle={toggleInlineStyle} 
-  />);
+    <Toolbar 
+      editorState={editorState} 
+      toggleBlockType={toggleBlockType} 
+      toggleInlineStyle={toggleInlineStyle} 
+    />
+  );
   return (
     <TextEditor 
           {...props}
