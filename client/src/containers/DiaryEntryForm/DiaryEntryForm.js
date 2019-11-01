@@ -86,6 +86,7 @@ class DiaryEntryForm extends Component {
         );
     }
     render() {
+        console.log(this.context);
         if(this.state.succes) {
             if(this.props.entry) {
                 const timestamp = this.props.entry.timestamp;

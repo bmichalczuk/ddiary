@@ -9,7 +9,6 @@ import {Link} from "react-router-dom";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import DiaryEditEntry from "../DiaryEditEntry/DiaryEditEntry";
 import DiaryNav from "../../components/DiaryNav/DiaryNav";
-
 export class Diary extends Component {
     constructor(props) {
         super(props);
@@ -25,12 +24,11 @@ export class Diary extends Component {
             );
         }
         const entriesIdList = Object.keys(this.props.auth.data.diary);
+        console.log(this.context);
         return (
             <section className={this.props.className}>
                    <ButtonLikeLink onClick={this.hideNav} to="/diary/new">New entry</ButtonLikeLink>
-                    
-                        <Router>
-                           
+                        <Router>                        
                             <DiaryWrapper>
                             <DiaryNav
                                 selectedEntry={this.state.selectedEntry} 
@@ -41,16 +39,14 @@ export class Diary extends Component {
                                 <Route path="/diary/entry/:id"  component={DiaryEntry} />
                                 <Route path="/diary/edit/:id" component={DiaryEditEntry} />
                             </EntryContainer>
-                           
-                            
                             </DiaryWrapper>
                         </Router>
-                
-                
             </section>
         );
     }
 };
+
+
 
 const StyledDiary = styled(Diary)`
     background-color: inherit;

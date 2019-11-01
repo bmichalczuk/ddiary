@@ -1,4 +1,4 @@
-import {FETCH_USER, ADD_DIARY_ENTRY, UPDATE_USER} from "../actions/actionsTypes";
+import {FETCH_USER, UPDATE_USER} from "../actions/actionsTypes";
 
 export default (state = null, action) => {
     switch (action.type) {

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {fetchUser} from "./actions/index";
+import {fetchUser,setFlashMsg,clearFlashMsg} from "./actions/index";
 import {connect} from "react-redux";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import AppHeader from "./containers/AppHeader/AppHeader";
@@ -8,15 +8,8 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Diary from "./containers/Diary/Diary";
 import DiaryNew from "./components/DiaryNew/DiaryNew";
 import {Redirect} from "react-router-dom";
-
-
-
-const DiaryEntryDummy = (props) => {
-    console.log(props.match.params)
-    return (
-        <p>{props.match.params.id}</p>
-    )
-};
+import FlashMessage from "./components/FlashMessage/FlashMessage";
+import showAndHide from "./helpers/showAndHide";
 
 class App extends Component {
     componentDidMount() {
@@ -26,16 +19,20 @@ class App extends Component {
         return (
             <Router>
                 <Layout>
-                    <AppHeader />
-                    <Route path="/" exact render={() => (
-                        this.props.auth ? (
-                            <Redirect to="/diary" />
-                        ) : (
-                            <LandingPage />
-                        )
-                    )} />
-                    <Route path="/diary" exact component={Diary} />
-                    <Route path="/diary/new" component={DiaryNew} />
+                        <AppHeader />
+                        <button onClick={() => this.props.setFlashMsg({text: "UWAGA UWAGA!!!", type: "warning"})}>set warning</button>
+                        <button onClick={() => this.props.clearFlashMsg()}> warning>clear warning</button>
+                        <button onClick={() => showAndHide(() => this.props.setFlashMsg({text: "terefer", type: "warmomg"}), this.props.clearFlashMsg, 3000)}> showandhide</button>
+                        <Route path="/" exact render={() => (
+                            this.props.auth ? (
+                                <Redirect to="/diary" />
+                            ) : (
+                                <LandingPage />
+                            )
+                        )} />
+                        <Route path="/diary" exact component={Diary} />
+                        <Route path="/diary/new" component={DiaryNew} />
+                        <FlashMessage />
                 </Layout>
             </Router>
         );     
@@ -43,7 +40,7 @@ class App extends Component {
 };
 
 function mapStateToProps({auth}) {
-    return {auth}
+    return {auth};
 }
 
-export default connect(mapStateToProps, {fetchUser})(App);
+export default connect(mapStateToProps, {fetchUser,setFlashMsg,clearFlashMsg})(App);

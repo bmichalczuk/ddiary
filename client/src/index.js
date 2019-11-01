@@ -10,7 +10,6 @@ import reduxThunk from "redux-thunk";
 //components
 import App from './App';
 
-
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(

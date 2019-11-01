@@ -8,9 +8,7 @@ const ButtonLikeLink = (props) => {
 }
 
 const StyledButtonLikeLink = styled(ButtonLikeLink)`
-       text-decoration: none;
-   
-        
+    text-decoration: none;
 `;
 
 export default StyledButtonLikeLink;

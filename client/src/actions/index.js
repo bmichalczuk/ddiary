@@ -1,4 +1,4 @@
-import {FETCH_USER, UPDATE_USER} from "./actionsTypes";
+import {FETCH_USER, UPDATE_USER, SET_FLASH_MSG, CLEAR_FLASH_MSG} from "./actionsTypes";
 import axios from "axios";
 
 export const fetchUser = () => {
@@ -17,5 +17,19 @@ export const updateUser = (user) => {
         type: UPDATE_USER,
         user
     }
-}
+};
+
+export const setFlashMsg = (msg) => {
+    console.log(msg);
+    return {
+        type: SET_FLASH_MSG,
+        msg
+    };
+};
+
+export const clearFlashMsg = () => {
+    return {
+        type: CLEAR_FLASH_MSG
+    };
+};
 

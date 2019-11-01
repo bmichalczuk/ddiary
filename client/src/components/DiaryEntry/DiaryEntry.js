@@ -9,6 +9,8 @@ import {connect} from "react-redux";
 import {fetchUser} from "../../actions";
 import TextEditor from "../TextEditor/TextEditor";
 import SubHeading from "../SubHeading/SubHeading";
+import {clearFlashMsg, setFlashMsg} from "../../actions";
+import showAndHide from "../../helpers/showAndHide";
 
 const CancelButton = styled(Button)`
     width: 30px;
@@ -25,14 +27,20 @@ class DiaryEntry extends Component {
         exists: true,
         removing: false
     };
-
+    showMessageOnRemove = () => {
+        const msgSetting = {text: "Succesfuly removed entry!", type: "info"};
+        showAndHide(this.props.setFlashMsg.bind(this, msgSetting), this.props.clearFlashMsg);
+    }
     removeDiaryEntry = async () => {
         this.setState({removing: true});
         await axios.delete(`/api/diary/${this.props.diaryEntry.timestamp}`);
         await this.props.fetchUser();
+        this.showMessageOnRemove();
         this.setState({exists: false, removing: false});
     }
+
     disableEditor = () => undefined;
+
     render() {
         if(!this.state.exists) {
             return <Redirect to="/" />
@@ -48,13 +56,12 @@ class DiaryEntry extends Component {
         const date = new Date(timestamp);
         const editorState = convertFromRaw(entry.editorState);
         const heading = date.toLocaleDateString();
-
         return (
             <div className={this.props.className}>
                 <SubHeading>{heading}</SubHeading>
                 <TextEditor
                     editorState={EditorState.createWithContent(editorState)}
-                    readOnly={true}
+                    readOnly
                 />          
                 <div className="DiaryEntry__btns">
                     <Button loading={this.state.removing} title="Remove entry" btnTheme="danger" onClick={this.removeDiaryEntry}>Delete</Button>
@@ -83,4 +90,4 @@ function mapStateToProps({auth}, ownProps) {
     }
 };
 
-export default connect(mapStateToProps, {fetchUser})(StyledDiaryEntry);
+export default connect(mapStateToProps, {clearFlashMsg, setFlashMsg, fetchUser})(StyledDiaryEntry);
