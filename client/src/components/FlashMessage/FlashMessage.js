@@ -5,7 +5,17 @@ import {clearFlashMsg} from "../../actions";
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 
-class Message extends Component {
+const Message = ({className, flashMsg}) => <div className={className}>{flashMsg.text}</div>;
+
+const StyledMessage = styled(Message)`
+            font-weight: bold;
+            padding: .5em;
+            background: ${props => props.flashMsg.type === "warning" ? "red" : "teal"};
+            color: white;
+            text-align: center;
+`
+
+class FlashMessage extends Component {
     state = {text: "", type: ""};
     static getDerivedStateFromProps(props, state) {
         if(!state.text) {
@@ -14,30 +24,18 @@ class Message extends Component {
         return null;
     }
     render() {
-        return (
-            <div>
-                {this.state.text}
-            </div>
-        );
-    }
-};
-
-class FlashMessage extends Component {
-    render() {
             return (
                 <div className={this.props.className}>
                     <CSSTransition
                         in={Boolean(this.props.flashMsg.text)} 
                         timeout={2000} 
-                        classNames="example"
+                        classNames="msg"
                         unmountOnExit
                     >
-                    <Message flashMsg={this.props.flashMsg} />
+                    <StyledMessage flashMsg={this.state} />
                     </CSSTransition>
                 </div>
             );
-        
-            
         }
     };
    
@@ -47,27 +45,21 @@ const StyledFlashMessage = styled(FlashMessage)`
         width: 100%;
         position: fixed;
         bottom: 0;
-        /*transform: ${props => props.flashMsg.text ? "translateY(0)" : "translateY(100%)"};*/
-        div {
-            background: red;
-            color: white;
-            text-align: center;
-        }
         
        
     
-    .example-enter {
-        transform: translateY(2em);
+    .msg-enter {
+        transform: translateY(3em);
     }
-    .example-enter.example-enter-active {
+    .msg-enter.msg-enter-active {
         transform: translateY(0);
         transition: transform 1s ease-in-out;
     }
-    .example-exit {
+    .msg-exit {
         transform: translateY(0);
     }
-    .example-exit.example-exit-active {
-        transform: translateY(2em);
+    .msg-exit.msg-exit-active {
+        transform: translateY(3em);
         transition: transform 1s ease-out;
     }
 `;

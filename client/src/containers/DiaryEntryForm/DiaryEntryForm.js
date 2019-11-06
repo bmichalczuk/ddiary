@@ -8,6 +8,8 @@ import styled from "styled-components";
 import {Redirect} from "react-router-dom";
 import {fetchUser} from "../../actions";
 import {connect} from "react-redux";
+import {setFlashMsg,clearFlashMsg} from "../../actions";
+import showAndHide from "../../helpers/showAndHide";
 
 const Warning = styled.div`
     color: red;
@@ -18,6 +20,18 @@ const Warning = styled.div`
 class DiaryEntryForm extends Component {
     state = {succes: false};
     checkIfEmpty = (currentContent) => !currentContent.hasText() || currentContent.getPlainText() === "";
+    displayMsgOnSucces = () => {
+        const {setFlashMsg, clearFlashMsg, entry} = this.props;
+        const text = entry ? "Entry updated!" : "Succesfully added new entry!";
+        const flashMsgSettings = {text, type: "info"};
+        showAndHide(setFlashMsg.bind(this, flashMsgSettings), clearFlashMsg);
+    }
+    displayMsgOnError = (errorMsg) => {
+        const {setFlashMsg, clearFlashMsg} = this.props;
+        const text = errorMsg;
+        const flashMsgSettings = {text, type: "warning"};
+        showAndHide(setFlashMsg.bind(this, flashMsgSettings), clearFlashMsg);
+    }
     renderForm = ({entry, className}) => {
         let timestamp;
         let editorState;
@@ -48,12 +62,20 @@ class DiaryEntryForm extends Component {
                         const {timestamp, editorState} = values;
                         const currentContent = editorState.getCurrentContent();
                         const state = await convertToRaw(currentContent)
-                        const res = await axios.post("/api/diary", {timestamp, editorState: state });
-                        if(res) {
+                        try {
+                            const res = await axios.post("/api/diary", {timestamp, editorState: state });
+                            if(res) {
+                                actions.setSubmitting(false);
+                                this.setState({succes: true});
+                                this.displayMsgOnSucces();
+                                this.props.fetchUser();
+                            }
+                        } catch(err) {
+                            
                             actions.setSubmitting(false);
-                            this.setState({succes: true});
-                            this.props.fetchUser();
+                            this.displayMsgOnError("Ooops, something went wrong!");
                         }
+                        
                     }
                     }
                 >
@@ -86,7 +108,6 @@ class DiaryEntryForm extends Component {
         );
     }
     render() {
-        console.log(this.context);
         if(this.state.succes) {
             if(this.props.entry) {
                 const timestamp = this.props.entry.timestamp;
@@ -109,4 +130,4 @@ const styledDiaryEntryForm = styled(DiaryEntryForm)`
     }
 `;
 
-export default connect(null, {fetchUser})(styledDiaryEntryForm);
+export default connect(null, {fetchUser, clearFlashMsg, setFlashMsg})(styledDiaryEntryForm);
