@@ -71,7 +71,6 @@ class DiaryEntryForm extends Component {
                                 this.props.fetchUser();
                             }
                         } catch(err) {
-                            
                             actions.setSubmitting(false);
                             this.displayMsgOnError("Ooops, something went wrong!");
                         }

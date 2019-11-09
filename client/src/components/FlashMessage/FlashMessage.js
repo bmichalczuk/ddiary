@@ -5,7 +5,9 @@ import {clearFlashMsg} from "../../actions";
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 
-const Message = ({className, flashMsg}) => <div className={className}>{flashMsg.text}</div>;
+const Message = ({className, flashMsg}) => {
+    return (<div className={className}>{flashMsg.text}</div>);
+};
 
 const StyledMessage = styled(Message)`
             font-weight: bold;
@@ -13,12 +15,15 @@ const StyledMessage = styled(Message)`
             background: ${props => props.flashMsg.type === "warning" ? "red" : "teal"};
             color: white;
             text-align: center;
-`
+`;
 
 class FlashMessage extends Component {
     state = {text: "", type: ""};
     static getDerivedStateFromProps(props, state) {
-        if(!state.text) {
+        const {text: stateText} = state;
+        const {text: propsText} = props.flashMsg;
+        const stateChangeAllowed = !stateText || (stateText !== propsText && propsText) 
+        if(stateChangeAllowed) {
             return {...props.flashMsg};
         }
         return null;
@@ -28,7 +33,7 @@ class FlashMessage extends Component {
                 <div className={this.props.className}>
                     <CSSTransition
                         in={Boolean(this.props.flashMsg.text)} 
-                        timeout={2000} 
+                        timeout={5000} 
                         classNames="msg"
                         unmountOnExit
                     >

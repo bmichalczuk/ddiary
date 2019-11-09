@@ -16,11 +16,10 @@ export const updateUser = (user) => {
     return {
         type: UPDATE_USER,
         user
-    }
+    };
 };
 
 export const setFlashMsg = (msg) => {
-    console.log(msg);
     return {
         type: SET_FLASH_MSG,
         msg
