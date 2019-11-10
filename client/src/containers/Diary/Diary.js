@@ -5,10 +5,19 @@ import DiaryEntriesList from "../../components/DiaryEntriesList/DiaryEntriesList
 import {connect} from "react-redux";
 import ButtonLikeLink from "../../components/ButtonLikeLink/ButtonLikeLink";
 import {fetchUser} from "../../actions/index";
-import {Link} from "react-router-dom";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import DiaryEditEntry from "../DiaryEditEntry/DiaryEditEntry";
 import DiaryNav from "../../components/DiaryNav/DiaryNav";
+
+const NewEntryLink = styled(ButtonLikeLink)`
+    @media (min-width: ${({theme:{breakpoint}}) => breakpoint.small}) {
+        max-width: 11em;
+        margin-bottom: 1em;
+    }
+`;
+
+
+
 export class Diary extends Component {
     constructor(props) {
         super(props);
@@ -24,29 +33,26 @@ export class Diary extends Component {
             );
         }
         const entriesIdList = Object.keys(this.props.auth.data.diary);
-        console.log(this.context);
         return (
             <section className={this.props.className}>
-                   <ButtonLikeLink onClick={this.hideNav} to="/diary/new">New entry</ButtonLikeLink>
+                   <NewEntryLink onClick={this.hideNav} to="/diary/new">New entry</NewEntryLink>
                         <Router>                        
                             <DiaryWrapper>
-                            <DiaryNav
-                                selectedEntry={this.state.selectedEntry} 
-                                selectEntry={this.selectEntry} 
-                                entriesIdList={entriesIdList}
-                            />
-                            <EntryContainer>
-                                <Route path="/diary/entry/:id"  component={DiaryEntry} />
-                                <Route path="/diary/edit/:id" component={DiaryEditEntry} />
-                            </EntryContainer>
+                                <DiaryNav
+                                    selectedEntry={this.state.selectedEntry} 
+                                    selectEntry={this.selectEntry} 
+                                    entriesIdList={entriesIdList}
+                                />
+                                <EntryContainer>
+                                    <Route path="/diary/entry/:id"  component={DiaryEntry} />
+                                    <Route path="/diary/edit/:id" component={DiaryEditEntry} />
+                                </EntryContainer>
                             </DiaryWrapper>
                         </Router>
             </section>
         );
     }
 };
-
-
 
 const StyledDiary = styled(Diary)`
     background-color: inherit;
@@ -55,6 +61,7 @@ const StyledDiary = styled(Diary)`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    
 `;
 const DiaryWrapper = styled.div`
     display: flex;

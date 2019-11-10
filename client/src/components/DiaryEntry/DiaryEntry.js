@@ -11,6 +11,7 @@ import TextEditor from "../TextEditor/TextEditor";
 import SubHeading from "../SubHeading/SubHeading";
 import {clearFlashMsg, setFlashMsg} from "../../actions";
 import showAndHide from "../../helpers/showAndHide";
+import ConfirmationWindow from "../ConfirmationWindow/ConfirmationWindow";
 
 const CancelButton = styled(Button)`
     width: 30px;
@@ -25,7 +26,8 @@ const CancelButton = styled(Button)`
 class DiaryEntry extends Component {
     state = {
         exists: true,
-        removing: false
+        removing: false,
+        removeConfirmationWindow: false
     };
     showMessageOnRemove = () => {
         const msgSetting = {text: "Succesfuly removed entry!", type: "info"};
@@ -40,7 +42,8 @@ class DiaryEntry extends Component {
     }
 
     disableEditor = () => undefined;
-
+    askForRemoveConfirmation = () => this.setState({removeConfirmationWindow: true});
+    cancelRemoveConfirmation = () => this.setState({removeConfirmationWindow: false});
     render() {
         if(!this.state.exists) {
             return <Redirect to="/" />
@@ -64,9 +67,33 @@ class DiaryEntry extends Component {
                     readOnly
                 />          
                 <div className="DiaryEntry__btns">
-                    <Button loading={this.state.removing} title="Remove entry" btnTheme="danger" onClick={this.removeDiaryEntry}>Delete</Button>
+                    <Button  
+                        title="Remove entry" 
+                        btnTheme="danger" 
+                        onClick={this.askForRemoveConfirmation}>
+                        Delete
+                    </Button>
                     <ButtonLikeLink to={`/diary/edit/${id}`}>Edit ext</ButtonLikeLink>
                 </div>
+                {this.state.removeConfirmationWindow && 
+                    <ConfirmationWindow cancel={this.cancelRemoveConfirmation}>
+                        <p>Are you sure to remove this entry? </p>
+                            <Button 
+                                inline
+                                loading={this.state.removing} 
+                                title="Remove entry" btnTheme="danger" 
+                                onClick={this.removeDiaryEntry}>Delete
+                            </Button>
+                            <Button 
+                                inline
+                                title="Remove entry" btnTheme="primary" 
+                                onClick={this.cancelRemoveConfirmation}>Cancel
+                            </Button>
+
+
+                    </ConfirmationWindow>
+                            
+                }
             </div>
         );
     }
@@ -81,6 +108,7 @@ const StyledDiaryEntry = styled(DiaryEntry)`
         display: flex;
         padding-top: 15px;
     }
+    
 `;
 
 function mapStateToProps({auth}, ownProps) {

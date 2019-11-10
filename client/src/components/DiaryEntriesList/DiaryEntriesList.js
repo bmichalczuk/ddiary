@@ -25,20 +25,22 @@ const DiaryEntriesList = (props) => {
 const StyledDiaryEntriesList = styled(DiaryEntriesList)`
     padding: 10px;
     transition: transform .3s ease-in-out;
-    transform: ${props => props.collapse ? "translateX(-250px)" : "translateX(0)"};
+    transform: translateX(${({collapse}) => collapse ? "-250px" : "0"});
     overflow: scroll;
     list-style-type: none;
     height: 100vh;
-    ${props => props.collapse && "position: absolute; z-index: 2;"};
-    @media (min-width: ${props => props.theme.breakpoint.small}) {
-        transform: translateX(0);
+    position: ${({collapse}) => collapse ? "absolute" : "static"};
+    z-index: ${({collapse}) => collapse ? "2" : "0"};
+    li {
+        padding: 0; margin: 0;
+    }
+    @media (min-width: ${({theme:{breakpoint}}) => breakpoint.medium}) {
+        transform: translateY(0);
         position: static;
         z-index: 0;
+        padding: 0;
     }
-    @media (min-width: ${props => props.theme.breakpoint.medium}) {
-        background: orange;
-    }
-    @media (min-width: ${props => props.theme.breakpoint.big}) {
+    @media (min-width: ${({theme:{breakpoint}}) => breakpoint.big}) {
         background: red;
     }
 `;

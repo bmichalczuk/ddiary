@@ -21,7 +21,7 @@ const StyledHamburgerButton = styled(HamburgerButton)`
     background-color: transparent;
     cursor: pointer;
     transition:.2s .1s ease-in-out;
-    @media (min-width: ${props => props.theme.breakpoint.small}) {
+    @media (min-width: ${props => props.theme.breakpoint.medium}) {
       display: none;
     }
     .hamburger-box {

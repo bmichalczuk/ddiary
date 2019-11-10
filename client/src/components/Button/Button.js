@@ -19,7 +19,7 @@ const themes = {
 
 const StyledButton = styled.button`
         padding: 1em 1.5em;
-        display: flex;
+        display: ${props => props.block ? "flex" : "inline-flex"};
         flex-wrap: nowrap;
         align-content: center;
         align-items: center;

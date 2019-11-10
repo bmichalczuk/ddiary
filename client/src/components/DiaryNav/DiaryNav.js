@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import styled from "styled-components";
 import DiaryEntriesList from "../DiaryEntriesList/DiaryEntriesList";
 import HamburgerButton from "../HamburgerButton/HamburgerButton";
-import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
 
 
 class DiaryNav extends Component {
@@ -36,18 +35,13 @@ class DiaryNav extends Component {
 };
 
 const Nav = styled.nav`
-    --red: "red";
-    --small: ${props => props.theme.breakpoint.small};
-    padding-top: 10px; 
-    background: ${({theme: {primaryColor}}) => primaryColor };
     z-index: 2;
     width: ${({navActive}) => navActive && "100%"};
     position: ${({navActive}) => navActive && "absolute"};
-    @media (min-width: var(--small)) {
-        max-width: ${({theme}) => theme.breakpoint.small};
+    @media (min-width: ${({theme:{breakpoint}}) => breakpoint.small}) {
+        
         position: static;
         z-index: 0;
-        max-width: 150px;
         background: red;
     }
     

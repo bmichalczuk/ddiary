@@ -5,9 +5,8 @@ import {clearFlashMsg} from "../../actions";
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 
-const Message = ({className, flashMsg}) => {
-    return (<div className={className}>{flashMsg.text}</div>);
-};
+const Message = ({className, flashMsg}) => <div className={className}>{flashMsg.text}</div>;
+
 
 const StyledMessage = styled(Message)`
             font-weight: bold;

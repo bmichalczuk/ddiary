@@ -24,6 +24,10 @@ const StyledEntryLink = styled(DiaryEntryLink)`
     letter-spacing: 1px;
     font-weight: bold;
     font-size: 1.2em;
+    @media (min-width: ${({theme: {breakpoint}}) => breakpoint.small}) {
+        margin: 0;
+        border-radius: 0;
+    }
 `;
 
 
