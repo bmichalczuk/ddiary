@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import styled from "styled-components";
-import {Editor, EditorState, convertFromRaw} from "draft-js"
+import {EditorState, convertFromRaw} from "draft-js"
 import Button from "../Button/Button";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
@@ -12,16 +12,6 @@ import SubHeading from "../SubHeading/SubHeading";
 import {clearFlashMsg, setFlashMsg} from "../../actions";
 import showAndHide from "../../helpers/showAndHide";
 import ConfirmationWindow from "../ConfirmationWindow/ConfirmationWindow";
-
-const CancelButton = styled(Button)`
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-`;
 
 class DiaryEntry extends Component {
     state = {
@@ -50,7 +40,7 @@ class DiaryEntry extends Component {
         }
         if(this.props.diaryEntry === null || this.props.diaryEntry === undefined) {
             return (
-                <p>fdaf</p>
+                null
             );
         }
         const {id} =this.props.match.params;
@@ -89,10 +79,7 @@ class DiaryEntry extends Component {
                                 title="Remove entry" btnTheme="primary" 
                                 onClick={this.cancelRemoveConfirmation}>Cancel
                             </Button>
-
-
                     </ConfirmationWindow>
-                            
                 }
             </div>
         );
@@ -104,11 +91,14 @@ const StyledDiaryEntry = styled(DiaryEntry)`
     display: flex;
     flex-direction: column;
     padding: 5px;
+    max-width: 40em;
+    margin:  0 auto;
+    
     .DiaryEntry__btns {
         display: flex;
         padding-top: 15px;
+        
     }
-    
 `;
 
 function mapStateToProps({auth}, ownProps) {

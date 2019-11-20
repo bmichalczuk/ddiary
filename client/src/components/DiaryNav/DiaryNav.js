@@ -38,17 +38,20 @@ const Nav = styled.nav`
     z-index: 2;
     width: ${({navActive}) => navActive && "100%"};
     position: ${({navActive}) => navActive && "absolute"};
-    @media (min-width: ${({theme:{breakpoint}}) => breakpoint.small}) {
-        
+    background: ${({theme:{primaryColor}}) => primaryColor};
+    margin-top: 1em;
+    
+    @media (min-width: ${({theme:{breakpoint}}) => breakpoint.medium}) {
         position: static;
+        max-width: 20em;
         z-index: 0;
-        background: red;
     }
     
-`;
-const StyledDiaryNav = styled(DiaryNav)`
-
-
+    @media (min-width: ${({theme:{breakpoint}}) => breakpoint.big}) {
+        background: orange;
+        width: 30em;
+    }
+    
 `;
 
 export default DiaryNav;

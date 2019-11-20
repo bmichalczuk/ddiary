@@ -41,7 +41,6 @@ const StyledDiaryEntriesList = styled(DiaryEntriesList)`
         padding: 0;
     }
     @media (min-width: ${({theme:{breakpoint}}) => breakpoint.big}) {
-        background: red;
     }
 `;
 

@@ -37,11 +37,21 @@ const styledAppHeader = styled(AppHeader)`
     justify-content: space-between;
     align-content: stretch;
     background-color: ${props => props.theme.secondaryColor};
-    margin-bottom: 10px;
+    @media(min-width: ${({theme: {breakpoint}}) => breakpoint.medium}) {
+        padding: .5em 5em;
+    }
     h1 {
         margin-left: 1em;
         display: flex;
         align-items: center;
+        @media(min-width: ${({theme: {breakpoint}}) => breakpoint.medium}) {
+            font-size: 2em;
+        }
+        img {
+            @media(min-width: ${({theme: {breakpoint}}) => breakpoint.medium}) {
+                transform: scale(1.2);
+            }
+        }
     }
     span {
         position: absolute; 

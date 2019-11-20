@@ -120,7 +120,8 @@ class DiaryEntryForm extends Component {
 
 const styledDiaryEntryForm = styled(DiaryEntryForm)`
     form {
-        max-width: 800px;
+        max-width: 40em;
+        margin: 0 auto;
     }
     form > button {
         margin-top: .5em;
