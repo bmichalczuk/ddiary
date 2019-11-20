@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Editor, EditorState, RichUtils, getDefaultKeyBinding} from "draft-js";
 import styled from "styled-components";
-import VisuallyHidden from "../../shared/VisuallyHidden";
 import "draft-js/dist/Draft.css";
 
 
@@ -17,8 +16,9 @@ const EditorContainer = styled.div`
   .DraftEditor-root {
     background-color: #fffef7;
     flex: 1;
-    overflow-y: scroll;
-    height: 300px;
+    /*overflow-y: ${({readOnly}) => readOnly ? "visible" : "scroll"};
+    ${({readOnly}) => readOnly ? "min-height: 300px" : "height: 300px"};*/
+    min-height: 300px;
     width: 100%;
     padding: 10px;
   }
@@ -40,14 +40,10 @@ const blockStyles = (contentBlock) => {
 };
 
 class TextEditor extends Component {
-  onChange = (editorState) => !this.props.readOnly ? this.props.onChange("editorState", editorState) : undefined;
+  onChange = (editorState) => !this.props.readOnly && this.props.onChange("editorState", editorState);
   onFocus = (e) => {
-    if(this.props.readOnly) {
-      return;
-    }
     e.stopPropagation();
     this.refs.editor.focus();
-    
   }
   toggleBlockType = (blockType) => {
     this.onChange(
@@ -66,9 +62,6 @@ class TextEditor extends Component {
     );
   }
   handleKeyCommand = (command, editorState) => {
-    if(this.props.readOnly) {
-      return;
-    }
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       this.onChange(newState);
@@ -87,6 +80,7 @@ class TextEditor extends Component {
             this.props.editorState
           )}
           <Editor
+            readOnly={this.props.readOnly}
             handleKeyCommand={this.handleKeyCommand}
             keyBindingFn={getDefaultKeyBinding}
             editorState={this.props.editorState}

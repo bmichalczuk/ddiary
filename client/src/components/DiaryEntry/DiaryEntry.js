@@ -54,7 +54,7 @@ class DiaryEntry extends Component {
                 <SubHeading>{heading}</SubHeading>
                 <TextEditor
                     editorState={EditorState.createWithContent(editorState)}
-                    readOnly
+                    readOnly={true}
                 />          
                 <div className="DiaryEntry__btns">
                     <Button  

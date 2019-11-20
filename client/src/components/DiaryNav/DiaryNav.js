@@ -39,12 +39,13 @@ const Nav = styled.nav`
     width: ${({navActive}) => navActive && "100%"};
     position: ${({navActive}) => navActive && "absolute"};
     background: ${({theme:{primaryColor}}) => primaryColor};
-    margin-top: 1em;
+    padding-top: 1em;
     
     @media (min-width: ${({theme:{breakpoint}}) => breakpoint.medium}) {
         position: static;
         max-width: 20em;
         z-index: 0;
+        height: 100%;
     }
     
     @media (min-width: ${({theme:{breakpoint}}) => breakpoint.big}) {
