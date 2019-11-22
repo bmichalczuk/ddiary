@@ -30,8 +30,6 @@ class DiaryEntry extends Component {
         this.showMessageOnRemove();
         this.setState({exists: false, removing: false});
     }
-
-    disableEditor = () => undefined;
     askForRemoveConfirmation = () => this.setState({removeConfirmationWindow: true});
     cancelRemoveConfirmation = () => this.setState({removeConfirmationWindow: false});
     render() {
@@ -43,6 +41,7 @@ class DiaryEntry extends Component {
                 null
             );
         }
+        console.log(this.props.diaryEntry);
         const {id} =this.props.match.params;
         const entry = this.props.diaryEntry
         const {timestamp} = entry;

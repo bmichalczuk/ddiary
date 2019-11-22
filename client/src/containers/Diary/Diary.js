@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import DiaryEntry from "../../components/DiaryEntry/DiaryEntry";
 import {connect} from "react-redux";
@@ -26,32 +26,24 @@ const StyledNoSelectedEntryInfo = styled(NoSelectedEntryInfo)`
 `;
 
 
-export class Diary extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {selectedEntry: null};
-    }
-    selectEntry = (id) => {
-        this.setState({selectedEntry: id});
-    }
-    render() {
-        
-        if(!this.props.auth) {
+export const Diary = (props) => {
+        const [selectedEntryId, selectEntry] = useState(null);
+        if(!props.auth) {
             return null;
         }
-        const entriesIdList = Object.keys(this.props.auth.data.diary);
+        const entriesIdList = Object.keys(props.auth.data.diary);
         return (
-            <section className={this.props.className}>
-                   <NewEntryLink onClick={this.hideNav} to="/diary/new">New entry</NewEntryLink>
+            <section className={props.className}>
+                   <NewEntryLink to="/diary/new">New entry</NewEntryLink>
                         <Router>                        
                             <DiaryWrapper>
                                 <DiaryNav
-                                    selectedEntry={this.state.selectedEntry} 
-                                    selectEntry={this.selectEntry} 
+                                    selectedEntry={selectedEntryId} 
+                                    selectEntry={selectEntry} 
                                     entriesIdList={entriesIdList}
                                 />
                                 <EntryContainer>
-                                    {!this.state.selectedEntry && <StyledNoSelectedEntryInfo />}
+                                    {!selectedEntryId && <StyledNoSelectedEntryInfo />}
                                     <Route path="/diary/entry/:id"  component={DiaryEntry} />
                                     <Route path="/diary/edit/:id" component={DiaryEditEntry} />
                                 </EntryContainer>
@@ -59,7 +51,7 @@ export class Diary extends Component {
                         </Router>
             </section>
         );
-    }
+
 };
 
 const StyledDiary = styled(Diary)`
