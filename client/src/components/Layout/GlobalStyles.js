@@ -22,6 +22,13 @@ const GlobalStyles = createGlobalStyle`
         font-family: ${props => props.theme.textFont};
         background-color: ${props => props.theme.primaryColor};
         color: ${props => props.theme.primaryColor};
+        @media (min-width: ${({theme: {breakpoint}}) => breakpoint.medium}) {
+            font-size: 1.2em;
+        }
+        
+        @media (min-width: ${({theme: {breakpoint}}) => breakpoint.large}) {
+            font-size: 1.5em;
+        }
     }
 `;
 

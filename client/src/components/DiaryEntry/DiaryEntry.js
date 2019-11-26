@@ -12,7 +12,8 @@ import SubHeading from "../SubHeading/SubHeading";
 import {clearFlashMsg, setFlashMsg} from "../../actions";
 import showAndHide from "../../helpers/showAndHide";
 import ConfirmationWindow from "../ConfirmationWindow/ConfirmationWindow";
-
+import {withRouter} from "react-router-dom";
+import Spinner from "../Spinner/Spinner";
 class DiaryEntry extends Component {
     state = {
         exists: true,
@@ -38,16 +39,16 @@ class DiaryEntry extends Component {
         }
         if(this.props.diaryEntry === null || this.props.diaryEntry === undefined) {
             return (
-                null
+                <Spinner />
             );
         }
-        console.log(this.props.diaryEntry);
         const {id} =this.props.match.params;
         const entry = this.props.diaryEntry
         const {timestamp} = entry;
         const date = new Date(timestamp);
         const editorState = convertFromRaw(entry.editorState);
         const heading = date.toLocaleDateString();
+        console.log(id);
         return (
             <div className={this.props.className}>
                 <SubHeading>{heading}</SubHeading>
@@ -90,13 +91,14 @@ const StyledDiaryEntry = styled(DiaryEntry)`
     display: flex;
     flex-direction: column;
     padding: 5px;
-    max-width: 40em;
     margin:  0 auto;
     
     .DiaryEntry__btns {
         display: flex;
         padding-top: 15px;
-        
+        button {
+            margin: 0 5px;
+        }
     }
 `;
 
@@ -107,4 +109,4 @@ function mapStateToProps({auth}, ownProps) {
     }
 };
 
-export default connect(mapStateToProps, {clearFlashMsg, setFlashMsg, fetchUser})(StyledDiaryEntry);
+export default withRouter(connect(mapStateToProps, {clearFlashMsg, setFlashMsg, fetchUser})(StyledDiaryEntry));

@@ -1,37 +1,36 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import DiaryEntriesList from "../DiaryEntriesList/DiaryEntriesList";
 import HamburgerButton from "../HamburgerButton/HamburgerButton";
+import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
 
-
-class DiaryNav extends Component {
-    state = {navActive: false};
-    toggleNavActive = () => {
-        this.setState(prevState => {
-            return {navActive: !prevState.navActive};
-        });
-    }
-    hideNav = () => {
-        this.setState({navActive: false});
-    }
-    render() {
-        const {entriesIdList, selectedEntry, selectEntry} = this.props;
+const DiaryNav = (props) => {
+    const [navActive, setNavActive] = useState(false);
+    const toggleNavActive = () => {
+        setNavActive(!navActive);
+    };
+    const hideNav = () => {
+        setNavActive(false);
+    };
+    const clearActiveEntry = () => props.selectEntry(true);
+        const {entriesIdList, selectedEntry, selectEntry} = props;
         if(!entriesIdList || entriesIdList.length === 0) {
             return <div>There are no entries yet. Click "New entry" to start your journal!</div>;
         }
         return (
-            <Nav navActive={this.state.navActive} className={this.props.className}>             
-                <HamburgerButton active={this.state.navActive} onClick={this.toggleNavActive} />
+            <Nav navActive={navActive} className={props.className}>   
+                <ButtonLikeLink onClick={clearActiveEntry} to="/diary/new">New Entry</ButtonLikeLink>
+                <HamburgerButton active={navActive} onClick={toggleNavActive} />
                 <DiaryEntriesList 
                     selectedEntry={selectedEntry} 
                     selectEntry={selectEntry} 
                     entriesIdList={entriesIdList}
-                    collapse={!this.state.navActive}
-                    hideNav={this.hideNav}
+                    collapse={!navActive}
+                    hideNav={hideNav}
                 />
             </Nav>
         );
-    }
+    
 };
 
 const Nav = styled.nav`
@@ -43,14 +42,13 @@ const Nav = styled.nav`
     
     @media (min-width: ${({theme:{breakpoint}}) => breakpoint.medium}) {
         position: static;
-        max-width: 20em;
+        width: 15em;
         z-index: 0;
         height: 100%;
     }
     
     @media (min-width: ${({theme:{breakpoint}}) => breakpoint.big}) {
-        background: orange;
-        width: 30em;
+        width: 17em;
     }
     
 `;

@@ -11,7 +11,7 @@ export const AppHeader = (props) => {
                 return <Spinner />;
             case false: 
                 return <a title="Login with Google" href="auth/google">Login with Google</a>;
-            default: return <a href="/api/logout">Logout</a>;
+            default: return <a title="Logout" href="/api/logout">Logout</a>;
         }   
     }
     return (
@@ -40,17 +40,15 @@ const styledAppHeader = styled(AppHeader)`
     @media(min-width: ${({theme: {breakpoint}}) => breakpoint.medium}) {
         padding: .5em 5em;
     }
+    @media(min-width: ${({theme: {breakpoint}}) => breakpoint.big}) {
+    }
     h1 {
         margin-left: 1em;
         display: flex;
         align-items: center;
-        @media(min-width: ${({theme: {breakpoint}}) => breakpoint.medium}) {
-            font-size: 2em;
-        }
         img {
-            @media(min-width: ${({theme: {breakpoint}}) => breakpoint.medium}) {
-                transform: scale(1.2);
-            }
+            height: 1.5em;
+            width: auto;
         }
     }
     span {

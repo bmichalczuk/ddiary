@@ -10,14 +10,11 @@ const EditorContainer = styled.div`
   align-content: center;
   align-items: center;
   justify-content: stretch;
-  max-width: 800px;
   border: 1px solid #ddd;
   color: ${props => props.theme.secondaryColor};
   .DraftEditor-root {
     background-color: #fffef7;
     flex: 1;
-    /*overflow-y: ${({readOnly}) => readOnly ? "visible" : "scroll"};
-    ${({readOnly}) => readOnly ? "min-height: 300px" : "height: 300px"};*/
     min-height: 300px;
     width: 100%;
     padding: 10px;

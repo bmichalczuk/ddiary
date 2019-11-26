@@ -16,7 +16,6 @@ const LandingPage = () => {
     return (
         <Wrapper>
             <GoogleAuthLink />
-            
         </Wrapper>
     );
 };

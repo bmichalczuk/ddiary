@@ -18,7 +18,7 @@ const Warning = styled.div`
 `;
 
 class DiaryEntryForm extends Component {
-    state = {succes: false};
+    state = {succes: false, onSuccesRedirectPath: ""};
     checkIfEmpty = (currentContent) => !currentContent.hasText() || currentContent.getPlainText() === "";
     displayMsgOnSucces = () => {
         const {setFlashMsg, clearFlashMsg, entry} = this.props;
@@ -66,9 +66,12 @@ class DiaryEntryForm extends Component {
                             const res = await axios.post("/api/diary", {timestamp, editorState: state });
                             if(res) {
                                 actions.setSubmitting(false);
-                                this.setState({succes: true});
                                 this.displayMsgOnSucces();
                                 this.props.fetchUser();
+                                this.setState({
+                                    succes: true, 
+                                    onSuccesRedirectPath: `/diary/entry/${timestamp}`
+                                });
                             }
                         } catch(err) {
                             actions.setSubmitting(false);
@@ -78,7 +81,7 @@ class DiaryEntryForm extends Component {
                     }
                     }
                 >
-                    {({values, touched, errors, isSubmitting, setFieldValue}) => {
+                    {({values, errors, isSubmitting, setFieldValue}) => {
                         if(values.redirect) {
                             return <Redirect to="/" />;
                         }
@@ -98,7 +101,6 @@ class DiaryEntryForm extends Component {
                                     btnTheme="primary">
                                     Submit
                                 </Button>
-                            
                             </Form>
                         );
                     }}
@@ -108,11 +110,11 @@ class DiaryEntryForm extends Component {
     }
     render() {
         if(this.state.succes) {
+            const {onSuccesRedirectPath} = this.state;
             if(this.props.entry) {
-                const timestamp = this.props.entry.timestamp;
-                return <Redirect to={`/diary/entry/${timestamp}`} />;
+                return <Redirect to={onSuccesRedirectPath} />;
             }
-            return <Redirect to={`/`} />;
+            return <Redirect to={onSuccesRedirectPath} />;
         }
         return this.renderForm(this.props);
     }
@@ -120,7 +122,6 @@ class DiaryEntryForm extends Component {
 
 const styledDiaryEntryForm = styled(DiaryEntryForm)`
     form {
-        max-width: 40em;
         margin: 0 auto;
     }
     form > button {

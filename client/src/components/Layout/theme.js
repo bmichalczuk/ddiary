@@ -8,7 +8,8 @@ const theme = {
     breakpoint: {
         small: "460px",
         medium: "680px",
-        big: "70em"
+        big: "1280px",
+        large: "1680px"
     }
 };
 

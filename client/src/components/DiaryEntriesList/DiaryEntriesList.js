@@ -31,9 +31,6 @@ const StyledDiaryEntriesList = styled(DiaryEntriesList)`
     height: 100vh;
     position: ${({collapse}) => collapse ? "absolute" : "static"};
     z-index: ${({collapse}) => collapse ? "2" : "0"};
-    li {
-        padding: 0; margin: 0;
-    }
     @media (min-width: ${({theme:{breakpoint}}) => breakpoint.medium}) {
         transform: translateY(0);
         position: static;

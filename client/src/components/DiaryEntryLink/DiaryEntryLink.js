@@ -2,12 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {convertSecondsToReadableDate} from "../../helpers/convertDate";
-import theme from "../Layout/theme";
-
 
 const DiaryEntryLink = ({id,className,selected, onClick}) => {
     const entryTitle = convertSecondsToReadableDate(id);
-    return <Link onClick={onClick} className={className} active={selected === id} selected={selected} to={`/diary/entry/${id}`}>{entryTitle}</Link>;
+    return <Link 
+        onClick={onClick} 
+        className={className} 
+        active={selected === id} 
+        selected={selected} 
+        to={`/diary/entry/${id}`}>
+            {entryTitle}
+    </Link>;
 };
 
 const StyledEntryLink = styled(DiaryEntryLink)`
@@ -26,7 +31,13 @@ const StyledEntryLink = styled(DiaryEntryLink)`
     font-size: 1.2em;
     @media (min-width: ${({theme: {breakpoint}}) => breakpoint.small}) {
         margin: 0;
-        border-radius: 0;
+    }
+    @media (min-width: ${({theme: {breakpoint}}) => breakpoint.medium}) {
+        font-size: .9em;
+        margin-bottom: .1em;
+    }
+    @media (min-width: ${({theme: {breakpoint}}) => breakpoint.big}) {
+        margin: 0 0 5px;
     }
 `;
 

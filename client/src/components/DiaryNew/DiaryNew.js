@@ -2,7 +2,7 @@ import React from "react";
 import DiaryEntryForm from "../../containers/DiaryEntryForm/DiaryEntryForm";
 import styled from "styled-components";
 import SubHeading from "../SubHeading/SubHeading";
-
+import {withRouter} from "react-router-dom";
 const DiaryNew = ({className}) => {
     return (
         <section className={className}>
@@ -19,5 +19,5 @@ const StyledDiaryNew = styled(DiaryNew)`
 `;
 
 
-export default StyledDiaryNew;
+export default withRouter(StyledDiaryNew);
 
