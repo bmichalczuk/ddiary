@@ -87,7 +87,7 @@ class TextEditor extends Component {
             />
         </EditorContainer>
       );
-    } return <div>Loading</div>;
+    }
     
   }
 };

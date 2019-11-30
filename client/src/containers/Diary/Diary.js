@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import DiaryEntry from "../../components/DiaryEntry/DiaryEntry";
 import {connect} from "react-redux";
 import ButtonLikeLink from "../../components/ButtonLikeLink/ButtonLikeLink";
 import {fetchUser} from "../../actions/index";
-import {Switch, Route, BrowserRouter as Router, useRouteMatch} from "react-router-dom";
+import {Switch, Route, BrowserRouter as Router, useRouteMatch, Redirect} from "react-router-dom";
 import DiaryEditEntry from "../DiaryEditEntry/DiaryEditEntry";
 import DiaryNav from "../../components/DiaryNav/DiaryNav";
 import DiaryNew from "../../components/DiaryNew/DiaryNew";
@@ -68,22 +68,21 @@ export const Diary = (props) => {
             <StyledDiary className={props.className}>
                             <DiaryWrapper>
                                 <Router>
-                                <DiaryNav
-                                    selectedEntry={selectedEntryId} 
-                                    selectEntry={selectEntry} 
-                                    entriesIdList={entriesIdList}
-                                />
-                                <EntryContainer>
-                                    {!selectedEntryId && <StyledNoSelectedEntryInfo />}
-                                    <Route exact path={`${path}/entry/:id`}>
-                                        <DiaryEntry />
-                                    </Route>
-                                    <Route exact path={`${path}/edit/:id`}>
-                                        <DiaryEditEntry />
-                                    </Route> 
-                                    
-                                    <Route path="/diary/new" component={DiaryNew} />   
-                                </EntryContainer>
+                                    <DiaryNav
+                                        selectedEntry={selectedEntryId} 
+                                        selectEntry={selectEntry} 
+                                        entriesIdList={entriesIdList}
+                                    />
+                                    <EntryContainer>
+                                        {!selectedEntryId && <StyledNoSelectedEntryInfo />}
+                                        <Route exact path={`${path}/entry/:id`}>
+                                            <DiaryEntry setAsActiveEntry={selectEntry}/>
+                                        </Route>
+                                        <Route exact path={`${path}/edit/:id`}>
+                                            <DiaryEditEntry />
+                                        </Route> 
+                                        <Route path="/diary/new" component={DiaryNew} />   
+                                    </EntryContainer>
                                 </Router>
                             </DiaryWrapper>
             </StyledDiary>

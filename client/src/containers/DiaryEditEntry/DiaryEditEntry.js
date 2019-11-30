@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 import {convertFromRaw} from "draft-js";
 import DiaryEntryForm from "../DiaryEntryForm/DiaryEntryForm";
 import SubHeading from "../../components/SubHeading/SubHeading";
-import {withRouter} from "react-router-dom";
+import {withRouter, useParams} from "react-router-dom";
 
 const DiaryEditEntry = (props) => {
     if(props.auth === null || props.auth === undefined) {

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import DiaryEntriesList from "../DiaryEntriesList/DiaryEntriesList";
 import HamburgerButton from "../HamburgerButton/HamburgerButton";
 import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
-
 const DiaryNav = (props) => {
     const [navActive, setNavActive] = useState(false);
     const toggleNavActive = () => {
@@ -13,23 +12,23 @@ const DiaryNav = (props) => {
         setNavActive(false);
     };
     const clearActiveEntry = () => props.selectEntry(true);
-        const {entriesIdList, selectedEntry, selectEntry} = props;
-        if(!entriesIdList || entriesIdList.length === 0) {
-            return <div>There are no entries yet. Click "New entry" to start your journal!</div>;
-        }
-        return (
-            <Nav navActive={navActive} className={props.className}>   
-                <ButtonLikeLink onClick={clearActiveEntry} to="/diary/new">New Entry</ButtonLikeLink>
-                <HamburgerButton active={navActive} onClick={toggleNavActive} />
-                <DiaryEntriesList 
-                    selectedEntry={selectedEntry} 
-                    selectEntry={selectEntry} 
-                    entriesIdList={entriesIdList}
-                    collapse={!navActive}
-                    hideNav={hideNav}
-                />
-            </Nav>
-        );
+    const {entriesIdList, selectedEntry, selectEntry} = props;
+    if(!entriesIdList || entriesIdList.length === 0) {
+        return <div>There are no entries yet. Click "New entry" to start your journal!</div>;
+    }
+    return (
+        <Nav navActive={navActive} className={props.className}>   
+            <ButtonLikeLink onClick={clearActiveEntry} to="/diary/new">New Entry</ButtonLikeLink>
+            <HamburgerButton active={navActive} onClick={toggleNavActive} />
+            <DiaryEntriesList 
+                selectedEntry={selectedEntry} 
+                selectEntry={selectEntry} 
+                entriesIdList={entriesIdList}
+                collapse={!navActive}
+                hideNav={hideNav}
+            />
+        </Nav>
+    );
     
 };
 

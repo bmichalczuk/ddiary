@@ -48,7 +48,7 @@ class DiaryEntry extends Component {
         const date = new Date(timestamp);
         const editorState = convertFromRaw(entry.editorState);
         const heading = date.toLocaleDateString();
-        console.log(id);
+        this.props.setAsActiveEntry(id);
         return (
             <div className={this.props.className}>
                 <SubHeading>{heading}</SubHeading>
