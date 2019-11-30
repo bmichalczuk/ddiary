@@ -3,14 +3,30 @@ import styled from "styled-components";
 import PropTyes from "prop-types";
 import Spinner from "../Spinner/Spinner";
 import DiaryEntryLink from "../DiaryEntryLink/DiaryEntryLink";
+import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
+
+const NewEntryLink = styled(ButtonLikeLink)`
+    display: block;
+    width: 90%;
+    margin: 0 auto 10px;
+`;
+
 
 const DiaryEntriesList = (props) => {
     if(!props.entriesIdList || props.entriesIdList.length === 0) {
         return <div>There are no entries yet. Click "New entry" to start your journal!</div>;
     }
-    const {entriesIdList, selectedEntry, selectEntry, className,collapse, hideNav} = props;
+    const {entriesIdList, selectedEntry, selectEntry, className,collapse, hideNav, clearActiveEntry} = props;
+    const handleNewEntryLinkClick = () => {
+        clearActiveEntry();
+        hideNav();
+    }
     return (
-            <ol className={className}>
+        <div className={className}>
+            
+            
+            <NewEntryLink onClick={handleNewEntryLinkClick} to="/diary/new">New Entry</NewEntryLink>
+            <ol>
                 {entriesIdList.map(id => {
                     return (
                         <li key={id}  >
@@ -19,6 +35,8 @@ const DiaryEntriesList = (props) => {
                     );
                 })}
             </ol>
+        </div>
+            
     );
 };
 

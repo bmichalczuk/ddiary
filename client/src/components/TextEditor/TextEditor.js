@@ -15,7 +15,7 @@ const EditorContainer = styled.div`
   .DraftEditor-root {
     background-color: #fffef7;
     flex: 1;
-    min-height: 300px;
+    min-height: 50vh;
     width: 100%;
     padding: 10px;
   }

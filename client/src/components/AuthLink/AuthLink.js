@@ -25,25 +25,27 @@ const StyledAuthLink = styled(AuthLink)`
     background-color: ${props => props.bgColor || "$ffffff"};
     color: ${props => props.color || "inherit"};
     font-size: 1.5em;
-    display: flex;
+    display: inline-flex;
     flex-wrap: nowrap;
+    width: 13em;
     justify-content: space-around;
     align-content: center;
     border-radius: 3em;
     padding: .5em .2em;
     height: 2.5em; 
-    width: 300px;
     text-decoration: none;
     transition: .2s;
+    
+    margin: 2em auto;
     img {
         flex: 1;
         max-height: 1.5em;
         width: auto;
+        margin-right: 5px;
     }
     span {
         flex: 1 auto;
     }
-    margin: 2em auto;
     :hover,
     :focus {
         filter: brightness(125%);

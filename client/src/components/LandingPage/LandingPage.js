@@ -4,6 +4,8 @@ import backgroundImage from "./landing-page.jpg";
 import AuthLink from "../AuthLink/AuthLink";
 import GoogleAuthLink from "../GoogleAuthLink/GoogleAuthLink";
 const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
     min-height: 100vh;
     background: black;
     background-image: url(${backgroundImage});

@@ -35,7 +35,7 @@ class DiaryEntry extends Component {
     cancelRemoveConfirmation = () => this.setState({removeConfirmationWindow: false});
     render() {
         if(!this.state.exists) {
-            return <Redirect to="/" />
+            return <Redirect to="/diary/new" />
         }
         if(this.props.diaryEntry === null || this.props.diaryEntry === undefined) {
             return (

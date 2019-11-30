@@ -24,7 +24,7 @@ class App extends Component {
                         <AppHeader />
                             <Route path="/" exact render={() => (
                                 this.props.auth ? (
-                                    <Redirect to="/diary" />
+                                    <Redirect to="/diary/new" />
                                 ) : (
                                     <LandingPage />
                                 )
@@ -36,11 +36,7 @@ class App extends Component {
         );     
     }
 };
-/*
 
-                            <Route path="/diary/entry/:id" component={DiaryEntry} />
-                            <Route path="/diary/edit/:id" component={DiaryEditEntry} />*/
-                            
 
 
 function mapStateToProps({auth}) {
