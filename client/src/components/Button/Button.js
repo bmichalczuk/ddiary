@@ -24,7 +24,9 @@ const themes = {
 };
 
 const StyledButton = styled.button`
+
         padding: 1em 1.5em;
+        font-size: 1em;
         display: ${props => props.block ? "flex" : "inline-flex"};
         flex-wrap: nowrap;
         align-content: center;

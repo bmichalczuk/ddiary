@@ -63,7 +63,7 @@ class DiaryEntry extends Component {
                         onClick={this.askForRemoveConfirmation}>
                         Delete
                     </Button>
-                    <ButtonLikeLink to={`/diary/edit/${id}`}>Edit ext</ButtonLikeLink>
+                    <ButtonLikeLink title="Edit entry">to={`/diary/edit/${id}`}>Edit entry</ButtonLikeLink>
                 </div>
                 {this.state.removeConfirmationWindow && 
                     <ConfirmationWindow cancel={this.cancelRemoveConfirmation}>
