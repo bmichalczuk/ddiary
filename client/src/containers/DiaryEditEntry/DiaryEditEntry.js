@@ -1,18 +1,16 @@
 import React from "react";
-import styled from "styled-components";
 import {connect} from "react-redux"
 import {convertFromRaw} from "draft-js";
 import DiaryEntryForm from "../DiaryEntryForm/DiaryEntryForm";
 import SubHeading from "../../components/SubHeading/SubHeading";
-import {withRouter, useParams} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 const DiaryEditEntry = (props) => {
     if(props.auth === null || props.auth === undefined) {
-        return <p>terefer</p>;
+        return null;
     }
     const {id} = props.match.params;
     let {timestamp, editorState} = props.auth.data.diary[id];
-    const { className} = props;
     const date = new Date(timestamp);
     const heading = date.toLocaleDateString();
     const entry = {timestamp, editorState: convertFromRaw(editorState)};
@@ -26,6 +24,6 @@ const DiaryEditEntry = (props) => {
 
 function mapStateToProps({auth}) {
     return {auth};
-}
+};
 
 export default withRouter(connect(mapStateToProps)(DiaryEditEntry));

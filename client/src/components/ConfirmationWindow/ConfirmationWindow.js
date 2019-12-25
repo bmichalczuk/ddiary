@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
-
 const BackgroundCover = styled.div`
     position: fixed;
     z-index: 9999;
@@ -24,7 +22,7 @@ const ModalBox = styled.div`
     text-align: center;
 `;
 
-const ConfirmationWindow = ({className, cancel, confirm, children}) => {
+const ConfirmationWindow = ({cancel, children}) => {
     const stopPropagation = e => e.stopPropagation();
     return (
         <BackgroundCover onClick={cancel}>

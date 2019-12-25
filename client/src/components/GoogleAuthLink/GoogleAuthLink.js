@@ -9,7 +9,7 @@ const GoogleAuthLink = () => {
             bgColor="#dd4b39" 
             color="white"
         >
-        Login with Google
+            Login with Google
         </AuthLink>
     );
 };

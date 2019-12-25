@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import VisuallyHidden from "../../shared/VisuallyHidden";
-import {Link} from "react-redux";
 const ArrowButton = styled.button`
     color: ${({theme: {fourthColor}}) => fourthColor};
     width: 0;

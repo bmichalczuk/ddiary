@@ -14,6 +14,7 @@ import showAndHide from "../../helpers/showAndHide";
 import ConfirmationWindow from "../ConfirmationWindow/ConfirmationWindow";
 import {withRouter} from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
+
 class DiaryEntry extends Component {
     state = {
         exists: true,
@@ -63,7 +64,7 @@ class DiaryEntry extends Component {
                         onClick={this.askForRemoveConfirmation}>
                         Delete
                     </Button>
-                    <ButtonLikeLink title="Edit entry">to={`/diary/edit/${id}`}>Edit entry</ButtonLikeLink>
+                    <ButtonLikeLink title="Edit entry" to={`/diary/edit/${id}`}>Edit entry</ButtonLikeLink>
                 </div>
                 {this.state.removeConfirmationWindow && 
                     <ConfirmationWindow cancel={this.cancelRemoveConfirmation}>

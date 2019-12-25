@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import DiaryEntry from "../../components/DiaryEntry/DiaryEntry";
 import {connect} from "react-redux";
-import ButtonLikeLink from "../../components/ButtonLikeLink/ButtonLikeLink";
 import {fetchUser} from "../../actions/index";
-import {Switch, Route, BrowserRouter as Router, useRouteMatch, Redirect} from "react-router-dom";
+import { Route, BrowserRouter as Router, useRouteMatch} from "react-router-dom";
 import DiaryEditEntry from "../DiaryEditEntry/DiaryEditEntry";
 import DiaryNav from "../../components/DiaryNav/DiaryNav";
 import DiaryNew from "../../components/DiaryNew/DiaryNew";
@@ -18,18 +17,6 @@ const StyledDiary = styled.section`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    @media (min-width: ${({theme}) => theme.breakpoint.small}) {
-        background: yellow;
-    }
-    @media (min-width: ${({theme}) => theme.breakpoint.medium}) {
-        background: orange;
-    }
-    @media (min-width: ${({theme}) => theme.breakpoint.big}) {
-        background: red;
-    }
-    @media (min-width: ${({theme}) => theme.breakpoint.large}) {
-        background: violet;
-    }
 `;
 
 const DiaryWrapper = styled.div`
@@ -42,6 +29,7 @@ const DiaryWrapper = styled.div`
         flex-wrap: nowrap;
     }
 `;
+
 const EntryContainer = styled.div`
     flex: 1;
     padding: 0 2em;

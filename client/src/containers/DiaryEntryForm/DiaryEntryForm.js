@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import RichTextEditor from "../../components/RichTextEditor/RichTextEditor";
 import axios from "axios";
 import {Formik, Form} from "formik";
-import {EditorState, convertToRaw, convertFromRaw, ContentState} from "draft-js";
+import {EditorState, convertToRaw} from "draft-js";
 import Button from "../../components/Button/Button";
 import styled from "styled-components";
 import {Redirect} from "react-router-dom";

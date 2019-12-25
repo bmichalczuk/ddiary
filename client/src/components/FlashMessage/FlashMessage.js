@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import styled from "styled-components";
 import {connect} from "react-redux";
 import {clearFlashMsg} from "../../actions";
-import {TransitionGroup, CSSTransition} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 
 
 const Message = ({className, flashMsg}) => <div className={className}>{flashMsg.text}</div>;

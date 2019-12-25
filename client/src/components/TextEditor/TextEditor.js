@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Editor, EditorState, RichUtils, getDefaultKeyBinding} from "draft-js";
+import {Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
 import styled from "styled-components";
 import "draft-js/dist/Draft.css";
 

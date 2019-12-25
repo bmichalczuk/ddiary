@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import backgroundImage from "./landing-page.jpg";
-import AuthLink from "../AuthLink/AuthLink";
 import GoogleAuthLink from "../GoogleAuthLink/GoogleAuthLink";
 const Wrapper = styled.div`
     display: flex;

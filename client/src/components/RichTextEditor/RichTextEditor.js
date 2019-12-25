@@ -4,7 +4,7 @@ import TextEditor from "../TextEditor/TextEditor";
 import Toolbar from "./RichTextEditorToolbar";
 
 const RichTextEditor = (props) => {
-  const {editorState, toggleBlockType, toggleInlineStyle} = props;
+  const {editorState} = props;
   const renderToolbar = (toggleInlineStyle, toggleBlockType, editorState) => (
     <Toolbar 
       editorState={editorState} 
