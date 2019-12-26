@@ -10,7 +10,6 @@ module.exports = (app) => {
         res.send(req.user);
     });
     app.delete("/api/diary/:entry", async (req, res) => {
-        console.log(req.params.entry);
         delete req.user.data.diary[req.params.entry];
         await req.user.markModified("data.diary");
         await req.user.save();
