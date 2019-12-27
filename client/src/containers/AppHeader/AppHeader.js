@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import ddiarylogo from "./logo-white.png";
 import styled from "styled-components";
 import Spinner from "../../components/Spinner/Spinner";
-
 export const AppHeader = (props) => {
     const renderAuthStatus = () => {
         switch(props.auth) {
