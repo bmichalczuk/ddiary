@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import ddiarylogo from "./logo-white.png";
 import styled from "styled-components";
 import Spinner from "../../components/Spinner/Spinner";
 export const AppHeader = (props) => {
@@ -17,7 +16,7 @@ export const AppHeader = (props) => {
         <header className={props.className}>
             <h1>
                 <a href={props.auth ? "/diary" : "/"} title="DDiary">
-                    <img src={ddiarylogo} alt="" />
+                    <img src="./logo-white.png" alt="" />
                     <span>DDiary</span>
                 </a>
             </h1>
