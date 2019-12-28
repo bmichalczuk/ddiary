@@ -44,7 +44,7 @@ const DiaryNav = (props) => {
                 <NewEntryLink btnTheme="emptyPrimary" onClick={handleNewEntryClick} to="/diary/new">New Entry</NewEntryLink>
                 {
                     !entriesIdList || entriesIdList.length === 0
-                    ? <div>There are no entries yet. Click "New entry" to start your journal!</div>
+                    ? null
                     :  <DiaryEntriesList 
                         selectedEntry={selectedEntry} 
                         entriesIdList={entriesIdList}
