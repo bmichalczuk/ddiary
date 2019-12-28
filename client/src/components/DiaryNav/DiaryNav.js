@@ -36,20 +36,24 @@ const DiaryNav = (props) => {
         hideNav();
     };
     
-    if(!entriesIdList || entriesIdList.length === 0) {
-        return <div>There are no entries yet. Click "New entry" to start your journal!</div>;
-    }
     return (
         <Nav navActive={navActive} className={props.className}>   
             <HamburgerButton active={navActive} onClick={toggleNavActive} />
             <CollapsableNavWrapper collapse={!navActive}>
                 
                 <NewEntryLink btnTheme="emptyPrimary" onClick={handleNewEntryClick} to="/diary/new">New Entry</NewEntryLink>
-                <DiaryEntriesList 
-                    selectedEntry={selectedEntry} 
-                    entriesIdList={entriesIdList}
-                    hideNav={hideNav}
-                />  
+                {
+                    !entriesIdList || entriesIdList.length === 0
+                    ? <div>There are no entries yet. Click "New entry" to start your journal!</div>
+                    :  <DiaryEntriesList 
+                        selectedEntry={selectedEntry} 
+                        entriesIdList={entriesIdList}
+                        hideNav={hideNav}
+                        /> 
+
+
+
+                } 
             </CollapsableNavWrapper>
            
         </Nav>
