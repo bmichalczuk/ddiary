@@ -70,7 +70,7 @@ const Nav = styled.nav`
     
     @media (min-width: ${({theme:{breakpoint}}) => breakpoint.medium}) {
         position: static;
-        width: 15em;
+        width: 11em;
         z-index: 0;
         height: 100%;
     }

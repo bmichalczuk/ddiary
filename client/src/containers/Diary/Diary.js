@@ -32,7 +32,10 @@ const DiaryWrapper = styled.div`
 
 const EntryContainer = styled.div`
     flex: 1;
-    padding: 0 2em;
+    padding: 0 .5em;
+    @media(min-width: ${({theme:{breakpoint: {big}}}) => big}) {
+        padding: 0 2em;
+    }
 `;
 
 const NoSelectedEntryInfo = ({className}) => <div className={className}>Select entry or add new one!</div>;
@@ -40,7 +43,7 @@ const NoSelectedEntryInfo = ({className}) => <div className={className}>Select e
 const StyledNoSelectedEntryInfo = styled(NoSelectedEntryInfo)`
     text-align: center;
     font-size: 3em;
-    margin-top: 3em;
+    margin-top: .5em;
 
 `;
 
