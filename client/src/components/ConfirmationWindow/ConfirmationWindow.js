@@ -20,6 +20,10 @@ const ModalBox = styled.div`
     right: 0;
     background: ${props => props.theme.primaryColor};
     text-align: center;
+    @media(min-width: ${({theme}) => theme.breakpoint.big}) {
+        max-width: 50%;
+        margin: auto;
+    }
 `;
 
 const ConfirmationWindow = ({cancel, children}) => {

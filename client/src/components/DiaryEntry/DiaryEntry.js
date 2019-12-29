@@ -68,7 +68,8 @@ class DiaryEntry extends Component {
                 </div>
                 {this.state.removeConfirmationWindow && 
                     <ConfirmationWindow cancel={this.cancelRemoveConfirmation}>
-                        <p>Are you sure to remove this entry? </p>
+                        <ConfirmRemoval>
+                            <p>Are you sure to remove this entry? </p>
                             <Button 
                                 inline
                                 loading={this.state.removing} 
@@ -80,12 +81,21 @@ class DiaryEntry extends Component {
                                 title="Remove entry" btnTheme="primary" 
                                 onClick={this.cancelRemoveConfirmation}>Cancel
                             </Button>
+                            </ConfirmRemoval>
                     </ConfirmationWindow>
                 }
             </div>
         );
     }
 };
+
+
+const ConfirmRemoval = styled.div`
+    p {
+        margin-bottom: .5em;
+    }
+`
+
 
 const StyledDiaryEntry = styled(DiaryEntry)`
     color: #000000;
