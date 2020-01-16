@@ -20,7 +20,7 @@ class App extends Component {
                         <AppHeader />
                             <Route path="/" exact render={() => (
                                 this.props.auth ? (
-                                    <Redirect to="/diary/new" />
+                                    <Redirect to="/diary" />
                                 ) : (
                                     <LandingPage />
                                 )
