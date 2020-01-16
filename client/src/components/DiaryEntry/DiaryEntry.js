@@ -35,12 +35,13 @@ class DiaryEntry extends Component {
     askForRemoveConfirmation = () => this.setState({removeConfirmationWindow: true});
     cancelRemoveConfirmation = () => this.setState({removeConfirmationWindow: false});
     render() {
+        console.log(this.props.theme);
         if(!this.state.exists) {
             return <Redirect to="/diary/new" />
         }
         if(this.props.diaryEntry === null || this.props.diaryEntry === undefined) {
             return (
-                <Spinner />
+                <Spinner size="20%" weight="5px" margin="20% auto" color="thirdColor"/>
             );
         }
         const {id} =this.props.match.params;
