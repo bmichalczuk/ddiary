@@ -41,7 +41,7 @@ class DiaryEntry extends Component {
         }
         if(this.props.diaryEntry === null || this.props.diaryEntry === undefined) {
             return (
-                <Spinner size="20%" weight="5px" margin="20% auto" color="thirdColor"/>
+                <Spinner size="10em" weight="5px" margin="20% auto" color="thirdColor"/>
             );
         }
         const {id} =this.props.match.params;

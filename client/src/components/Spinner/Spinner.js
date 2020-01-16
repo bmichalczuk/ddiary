@@ -15,7 +15,7 @@ const StyledSpinner = styled(Spinner)`
         }
         width: ${props => props.size || "50px"};
         height: ${props => props.size || "50px"};
-        color: ${props => props.theme[props.color] ? props.theme[props.color] : (props.color || "#ffffff")}; 
+        color: ${({color, theme}) => theme[color] ? theme[color] : color }; 
         border-style: solid;              
         border-width: ${props => props.weight || "2px"};
         margin: ${props => props.margin || "0 4px"};
