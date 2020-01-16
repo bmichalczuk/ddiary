@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-const Spinner = (props) => <div className={props.className}></div>;
+const Spinner = (props) => <div {...props}></div>;
+
 
 const StyledSpinner = styled(Spinner)`
 
@@ -11,15 +12,9 @@ const StyledSpinner = styled(Spinner)`
                 }
         
         }
-        ${props => {
-                return (
-                        `width: ${props.size || "50px"};
-                         height: ${props.size || "50px"};
-                         color: ${props => props.color || "#ffffff"};
-                        `
-                );
-                
-        }}
+        width: ${props => props.size || "50px"};
+        height: ${props => props.size || "50px"};
+        color: ${props => props.color || "#ffffff"};               
         border: 2px solid;
         margin: 0 4px;
         border-radius: 100%;
