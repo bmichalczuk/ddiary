@@ -33,9 +33,8 @@ class DiaryEntry extends Component {
         this.setState({exists: false, removing: false});
     }
     askForRemoveConfirmation = () => this.setState({removeConfirmationWindow: true});
-    cancelRemoveConfirmation = () => this.setState({removeConfirmationWindow: false});
+    cancelRemoveConfirmation = () => !this.state.removing && this.setState({removeConfirmationWindow: false});
     render() {
-        console.log(this.props.theme);
         if(!this.state.exists) {
             return <Redirect to="/diary/new" />
         }
@@ -78,7 +77,7 @@ class DiaryEntry extends Component {
                             </Button>
                             <Button 
                                 inline
-                                title="Remove entry" btnTheme="primary" 
+                                title="Don't remove" btnTheme="primary" 
                                 onClick={this.cancelRemoveConfirmation}>Cancel
                             </Button>
                     </ConfirmationWindow>
