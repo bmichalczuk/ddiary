@@ -40,8 +40,7 @@ const DiaryNav = (props) => {
         <Nav navActive={navActive} className={props.className}>   
             <HamburgerButton active={navActive} onClick={toggleNavActive} />
             <CollapsableNavWrapper collapse={!navActive}>
-                
-                <NewEntryLink btnTheme="emptyPrimary" onClick={handleNewEntryClick} to="/diary/new">New Entry</NewEntryLink>
+                <NewEntryLink title="Add new entry" btnTheme="emptyPrimary" onClick={handleNewEntryClick} to="/diary/new">New Entry</NewEntryLink>
                 {
                     !entriesIdList || entriesIdList.length === 0
                     ? null
@@ -50,9 +49,6 @@ const DiaryNav = (props) => {
                         entriesIdList={entriesIdList}
                         hideNav={hideNav}
                         /> 
-
-
-
                 } 
             </CollapsableNavWrapper>
            

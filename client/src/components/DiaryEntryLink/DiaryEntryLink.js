@@ -1,18 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import {convertSecondsToReadableDate} from "../../helpers/convertDate";
 
 const DiaryEntryLink = ({id,className,selected, onClick}) => {
-    const entryTitle = convertSecondsToReadableDate(id);
-    return <Link 
-        onClick={onClick} 
-        className={className} 
-        active={selected === id} 
-        selected={selected} 
-        to={`/diary/entry/${id}`}>
-            {entryTitle}
-    </Link>;
+    const date = new Date(parseInt(id));
+    const entryDate = date.toLocaleDateString();
+    return (
+        <Link 
+            title={`Go to entry from ${entryDate}`}
+            onClick={onClick} 
+            className={className} 
+            active={selected === id} 
+            selected={selected} 
+            to={`/diary/entry/${id}`}>
+                {entryDate}
+        </Link>);
 };
 
 const StyledEntryLink = styled(DiaryEntryLink)`
