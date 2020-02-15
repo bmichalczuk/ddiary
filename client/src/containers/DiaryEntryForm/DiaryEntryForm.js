@@ -18,7 +18,10 @@ const Warning = styled.div`
 
 class DiaryEntryForm extends Component {
     state = {succes: false, onSuccesRedirectPath: ""};
-    checkIfEmpty = (currentContent) => !currentContent.hasText() || currentContent.getPlainText() === "";
+    checkIfEmpty = (value) => {
+        const val = value.trim();
+        return val < 1 || val === '<p><br></p>';//
+    }
     displayMsgOnSucces = () => {
         const {setFlashMsg, clearFlashMsg, entry} = this.props;
         const text = entry ? "Entry updated!" : "Succesfully added new entry!";
@@ -51,8 +54,7 @@ class DiaryEntryForm extends Component {
                     }}
                     validate={values => {
                         let errors = {};
-                        const currentContent = values.editorState.getCurrentContent();
-                        if(this.checkIfEmpty(currentContent)) {
+                        if(this.checkIfEmpty(values.value)) {
                             errors.entry = "Your entry is empty! Type something in ;)";
                         }
                         return errors;
@@ -86,7 +88,6 @@ class DiaryEntryForm extends Component {
                             <Form>
                                 <RichTextEditor 
                                     timestamp={values.timestamp}
-                                    
                                     value={values.value}
                                     onChange={setFieldValue}
                                 />
