@@ -7,7 +7,6 @@ import QTextEditor from "../QTextEditor/QTextEditor";
 const DiaryNew = ({className}) => {
     return (
         <section className={className}>
-            <QTextEditor></QTextEditor>
             <SubHeading>Add new entry</SubHeading>
             <DiaryEntryForm />
         </section>

@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import RichTextEditor from "../../components/RichTextEditor/RichTextEditor";
 import axios from "axios";
 import {Formik, Form} from "formik";
-import {EditorState, convertToRaw} from "draft-js";
 import Button from "../../components/Button/Button";
 import styled from "styled-components";
 import {Redirect} from "react-router-dom";
@@ -34,21 +33,21 @@ class DiaryEntryForm extends Component {
     }
     renderForm = ({entry, className}) => {
         let timestamp;
-        let editorState;
+        let value;
         if(entry) {
             timestamp =  entry.timestamp;
-            editorState = EditorState.createWithContent(entry.editorState);
+            value = entry.value;
             
         } else {
             timestamp = Date.now();
-            editorState = EditorState.createEmpty();
+            value = "";
         }
         return (
             <div className={className}>
                 <Formik
                     initialValues = {{
                         timestamp,
-                        editorState
+                        value
                     }}
                     validate={values => {
                         let errors = {};
@@ -59,11 +58,9 @@ class DiaryEntryForm extends Component {
                         return errors;
                     }}
                     onSubmit = {async (values, actions) => {
-                        const {timestamp, editorState} = values;
-                        const currentContent = editorState.getCurrentContent();
-                        const state = await convertToRaw(currentContent)
+                        const {timestamp, value} = values;
                         try {
-                            const res = await axios.post("/api/diary", {timestamp, editorState: state });
+                            const res = await axios.post("/api/diary", {timestamp, value });
                             if(res) {
                                 actions.setSubmitting(false);
                                 this.displayMsgOnSucces();
@@ -90,7 +87,7 @@ class DiaryEntryForm extends Component {
                                 <RichTextEditor 
                                     timestamp={values.timestamp}
                                     
-                                    editorState={values.editorState}
+                                    value={values.value}
                                     onChange={setFieldValue}
                                 />
                                 {errors.entry && <Warning>{errors.entry}</Warning>}

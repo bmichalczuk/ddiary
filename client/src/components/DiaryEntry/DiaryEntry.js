@@ -7,7 +7,7 @@ import {Redirect} from "react-router-dom";
 import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
 import {connect} from "react-redux";
 import {fetchUser} from "../../actions";
-import TextEditor from "../TextEditor/TextEditor";
+import TextEditor from "../QTextEditor/QTextEditor";
 import SubHeading from "../SubHeading/SubHeading";
 import {clearFlashMsg, setFlashMsg} from "../../actions";
 import showAndHide from "../../helpers/showAndHide";
@@ -43,18 +43,17 @@ class DiaryEntry extends Component {
                 <Spinner size="10em" weight="5px" margin="20% auto" color="thirdColor"/>
             );
         }
-        const {id} =this.props.match.params;
-        const entry = this.props.diaryEntry
-        const {timestamp} = entry;
+        const {timestamp, value} = this.props.diaryEntry;
         const date = new Date(timestamp);
-        const editorState = convertFromRaw(entry.editorState);
         const heading = date.toLocaleDateString("en", {year: "numeric", month: "long", day: "2-digit"});
+        const {id} =this.props.match.params;
         this.props.setAsActiveEntry(id);
         return (
             <div className={this.props.className}>
                 <SubHeading>{heading}</SubHeading>
                 <TextEditor
-                    editorState={EditorState.createWithContent(editorState)}
+                    modules={{toolbar: false}}
+                    value={value}
                     readOnly={true}
                 />          
                 <div className="DiaryEntry__btns">

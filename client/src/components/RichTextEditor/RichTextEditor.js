@@ -1,25 +1,24 @@
 import React from "react";
 import "draft-js/dist/Draft.css";
-import TextEditor from "../TextEditor/TextEditor";
-import Toolbar from "./RichTextEditorToolbar";
+import TextEditor from "../QTextEditor/QTextEditor";
+import PropTypes from "prop-types";
 
 const RichTextEditor = (props) => {
-  const {editorState} = props;
-  const renderToolbar = (toggleInlineStyle, toggleBlockType, editorState) => (
-    <Toolbar 
-      editorState={editorState} 
-      toggleBlockType={toggleBlockType} 
-      toggleInlineStyle={toggleInlineStyle} 
-    />
-  );
+  const handleChange = value => props.onChange(value);
   return (
     <TextEditor 
-          {...props}
-          editorState={editorState}
-          renderToolbar={renderToolbar}
-        />
+      {...props}
+      onChange={handleChange}
+    />
   );
-}
+};
 
+RichTextEditor.propTypes = {
+  onChange: PropTypes.func,
+  value: PropTypes.oneOfType([
+    PropTypes.object, 
+    PropTypes.string
+  ])
+};
 
 export default RichTextEditor;

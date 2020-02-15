@@ -44,7 +44,6 @@ const StyledNoSelectedEntryInfo = styled(NoSelectedEntryInfo)`
     text-align: center;
     font-size: 3em;
     margin-top: .5em;
-
 `;
 
 export const Diary = (props) => {
@@ -55,34 +54,30 @@ export const Diary = (props) => {
         }
         const entriesIdList = Object.keys(props.auth.data.diary);
         return (
-
             <StyledDiary className={props.className}>
-                            <DiaryWrapper>
-                                <Router>
-                                    <DiaryNav
-                                        selectedEntry={selectedEntryId} 
-                                        selectEntry={selectEntry} 
-                                        entriesIdList={entriesIdList}
-                                    />
-                                    <EntryContainer>
-                                        {!selectedEntryId && <StyledNoSelectedEntryInfo />}
-                                        <Route exact path={`${path}/entry/:id`}>
-                                            <DiaryEntry setAsActiveEntry={selectEntry}/>
-                                        </Route>
-                                        <Route exact path={`${path}/edit/:id`}>
-                                            <DiaryEditEntry />
-                                        </Route> 
-                                        <Route path="/diary/new" component={DiaryNew} />   
-                                    </EntryContainer>
-                                </Router>
-                            </DiaryWrapper>
+                <DiaryWrapper>
+                    <Router>
+                        <DiaryNav
+                            selectedEntry={selectedEntryId} 
+                            selectEntry={selectEntry} 
+                            entriesIdList={entriesIdList}
+                        />
+                        <EntryContainer>
+                            {!selectedEntryId && <StyledNoSelectedEntryInfo />}
+                            <Route exact path={`${path}/entry/:id`}>
+                                <DiaryEntry setAsActiveEntry={selectEntry}/>
+                            </Route>
+                            <Route exact path={`${path}/edit/:id`}>
+                                <DiaryEditEntry />
+                            </Route> 
+                            <Route path="/diary/new" component={DiaryNew} />   
+                        </EntryContainer>
+                    </Router>
+                </DiaryWrapper>
             </StyledDiary>
         );
 
 };
-
-
-
 
 function mapStateToProps({auth}) {
     return {auth};
