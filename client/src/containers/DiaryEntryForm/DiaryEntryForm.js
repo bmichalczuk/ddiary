@@ -18,10 +18,8 @@ const Warning = styled.div`
 
 class DiaryEntryForm extends Component {
     state = {succes: false, onSuccesRedirectPath: ""};
-    checkIfEmpty = (value) => {
-        const val = value.trim();
-        return val < 1 || val === '<p><br></p>';//
-    }
+    //quill leaves <p><br></p> after remove value
+    checkIfEmpty = (value) => value.replace(/<(.|\n)*?>/g, '').trim().length === 0;
     displayMsgOnSucces = () => {
         const {setFlashMsg, clearFlashMsg, entry} = this.props;
         const text = entry ? "Entry updated!" : "Succesfully added new entry!";
