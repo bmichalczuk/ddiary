@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux"
-import {convertFromRaw} from "draft-js";
 import DiaryEntryForm from "../DiaryEntryForm/DiaryEntryForm";
 import SubHeading from "../../components/SubHeading/SubHeading";
 import {withRouter} from "react-router-dom";
@@ -10,10 +9,10 @@ const DiaryEditEntry = (props) => {
         return null;
     }
     const {id} = props.match.params;
-    let {timestamp, editorState} = props.auth.data.diary[id];
+    let {timestamp, value} = props.auth.data.diary[id];
     const date = new Date(timestamp);
     const heading = date.toLocaleDateString();
-    const entry = {timestamp, editorState: convertFromRaw(editorState)};
+    const entry = {timestamp,value};
     return (
         <div>
             <SubHeading>Edit {heading}</SubHeading>

@@ -12,13 +12,14 @@ const StyledEditor = styled(ReactQuill)`
 
 const TextEditor = (props) => {
     const {value, onChange} = props;
+    const handleChange = value => onChange("value", value);
     return (
-            <StyledEditor {...props} value={value} onChange={onChange} />
+        <StyledEditor {...props} value={value} onChange={handleChange} />
     );
 };
 
-TextEditor.propTypes = {
+/*TextEditor.propTypes = {
     value: PropTypes.any.isRequired
-};
+};*/
 
 export default TextEditor;

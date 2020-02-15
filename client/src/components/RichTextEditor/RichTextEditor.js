@@ -4,11 +4,9 @@ import TextEditor from "../QTextEditor/QTextEditor";
 import PropTypes from "prop-types";
 
 const RichTextEditor = (props) => {
-  const handleChange = value => props.onChange(value);
   return (
     <TextEditor 
       {...props}
-      onChange={handleChange}
     />
   );
 };
