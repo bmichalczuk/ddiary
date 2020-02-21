@@ -3,15 +3,11 @@ import styled from "styled-components";
 
 const Spinner = (props) => <div {...props}></div>;
 
-
-
 const StyledSpinner = styled(Spinner)`
-
         @keyframes spin {
                 100% {
                         transform: rotate(360deg);
                 }
-        
         }
         width: ${props => props.size || "50px"};
         height: ${props => props.size || "50px"};
