@@ -1,31 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Spinner from "../Spinner/Spinner";
+import propTypes from "prop-types";
+import btnThemes from "../../shared/btnThemes";
 
-const themes = {
-    primary: {
-        color: "#FFFFFF",
-        background: "#089DD7",
-        hoverColor: "#089DD7",
-        hoverBackground: "#FFFFFF"
-    },
-    emptyPrimary: {
-        color: "#089DD7",
-        background: "#FFFFFF",
-        hoverColor: "#FFFFFF",
-        hoverBackground: "#089DD7"
-    },
-    danger: {
-        color: "#FFFFFF",
-        background: "#f91b07",
-        hoverColor: "#f91b07",
-        hoverBackground: "#FFFFFF"
-    }
-};
 
 const StyledButton = styled.button`
-
-        padding: 1em 1.5em;
+        padding: 0.5em 1em;
         font-size: 1em;
         display: ${props => props.block ? "flex" : "inline-flex"};
         flex-wrap: nowrap;
@@ -45,24 +26,29 @@ const StyledButton = styled.button`
         }
         ${ props => {
             const type = props.btnTheme ? props.btnTheme : "primary";
-            const {color, background, hoverColor, hoverBackground} = themes[type];
+            const {color, background, hoverColor, hoverBackground} = btnThemes[type];
             return `
                 color: ${color};
                 background: ${background};
                 :hover,
                 :focus {
+                    transition: .3s;
                     color: ${!props.disabled && hoverColor};
                     background: ${!props.disabled && hoverBackground};
+         
                 }
+
             `;
         }}
 `;
 
 const Btn = (props) => {
-    if (!props.loading) {
-        return <StyledButton {...props}>{props.children}</StyledButton>;
-    }
-    return <StyledButton {...props}><span>{props.children}</span><Spinner size="15px"/></StyledButton>;
+        return (
+        <StyledButton {...props}>
+            {props.children}
+            {props.loading && <Spinner size="15px"/>}
+        </StyledButton>
+        );
 };
 
 

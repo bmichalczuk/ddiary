@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import styled from "styled-components";
-import {EditorState, convertFromRaw} from "draft-js"
 import Button from "../Button/Button";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
@@ -14,6 +13,8 @@ import showAndHide from "../../helpers/showAndHide";
 import ConfirmationWindow from "../ConfirmationWindow/ConfirmationWindow";
 import {withRouter} from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
+import DeleteButton from "../Button/DeleteButton";
+import VisuallyHidden from "../../shared/VisuallyHidden";
 
 class DiaryEntry extends Component {
     state = {
@@ -57,28 +58,28 @@ class DiaryEntry extends Component {
                     readOnly={true}
                 />          
                 <div className="DiaryEntry__btns">
-                    <Button  
+                    <ButtonLikeLink title="Edit entry" to={`/diary/edit/${id}`}>Edit entry</ButtonLikeLink>
+                    <DeleteButton  
+                        iconOnly="true"
                         title="Remove entry" 
                         btnTheme="danger" 
-                        onClick={this.askForRemoveConfirmation}>
-                        Delete
-                    </Button>
-                    <ButtonLikeLink title="Edit entry" to={`/diary/edit/${id}`}>Edit entry</ButtonLikeLink>
+                        onClick={this.askForRemoveConfirmation}
+                    />
                 </div>
                 {this.state.removeConfirmationWindow && 
                     <ConfirmationWindow cancel={this.cancelRemoveConfirmation}>
-                        <ConfirmationWindowMsg>Are you sure to remove this entry?</ConfirmationWindowMsg>  
+                        <ConfirmationWindowMsg>Are you sure to remove this entry?</ConfirmationWindowMsg>
+                        <div className="DiaryEntry__btns">
                             <Button 
-                                inline
-                                loading={this.state.removing} 
-                                title="Remove entry" btnTheme="danger" 
-                                onClick={this.removeDiaryEntry}>Delete
-                            </Button>
-                            <Button 
-                                inline
                                 title="Don't remove" btnTheme="primary" 
                                 onClick={this.cancelRemoveConfirmation}>Cancel
                             </Button>
+                            <DeleteButton 
+                                loading={this.state.removing} 
+                                title="Remove entry" btnTheme="danger" 
+                                onClick={this.removeDiaryEntry}
+                            />
+                            </div>  
                     </ConfirmationWindow>
                 }
             </div>

@@ -3,6 +3,10 @@ import {connect} from "react-redux";
 import ddiarylogo from "./logo-white.png";
 import styled from "styled-components";
 import Spinner from "../../components/Spinner/Spinner";
+import LoginIcon from "../../Icons/login";
+import LogoutIcon from "../../Icons/logout";
+import VisuallyInvisible from "../../shared/VisuallyHidden";
+
 
 export const AppHeader = (props) => {
     const renderAuthStatus = () => {
@@ -10,8 +14,14 @@ export const AppHeader = (props) => {
             case null:
                 return <Spinner />;
             case false: 
-                return <a title="Login with Google" href="auth/google">Login with Google</a>;
-            default: return <a title="Logout" href="/api/logout">Logout</a>;
+                return (<a title="Login with Google" href="auth/google">
+                        <VisuallyInvisible>Login with Google</VisuallyInvisible> 
+                        <LoginIcon />
+                    </a>);
+            default: return (<a title="Logout" href="/api/logout">
+                    <VisuallyInvisible>Logout</VisuallyInvisible> 
+                    <LogoutIcon />
+                </a>);
         }   
     }
     return (
@@ -41,6 +51,12 @@ const styledAppHeader = styled(AppHeader)`
         padding: .5em 5em;
     }
     @media(min-width: ${({theme: {breakpoint}}) => breakpoint.big}) {
+    }
+    svg {
+        fill: #ffffff;
+        height: 1em;
+        width: auto;
+        margin-left: 3px;
     }
     h1 {
         margin-left: 1em;
