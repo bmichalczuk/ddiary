@@ -1,20 +1,18 @@
 import React from "react";
 import Button from "./Button";
-import styled, { ThemeConsumer } from "styled-components";
 import TrashCanIcon from "../../Icons/TrashCanIcon";
 import VisuallyHidden from "../../shared/VisuallyHidden";
+import ButtonWithIcon from "./ButtonWithIcon";
 
 const DeleteButton = (props) => {
     return (
-        <Button {...props}>
-            <TrashCanIcon />
-            {props.iconOnly
-            ? <VisuallyHidden>Remove</VisuallyHidden>
-            : "Remove"
-            }
-            
-        </Button>
-    )
+        <ButtonWithIcon {...props} Icon={TrashCanIcon} btnTheme="danger">
+            {props.children}
+        </ButtonWithIcon>
+    );
 };
+
+
+
 
 export default DeleteButton;

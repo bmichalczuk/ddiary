@@ -2,17 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const IconWraper = (props) => {
-    return <>{props.children}</>
+    return <span {...props}>{props.children}</span>
 };
 
 const StyledIconWraper = styled(IconWraper)`
     svg {
-        height: .9em;
+        height: 1em;
         width: auto;
         margin-right: 3px;
-        fill: blue;
-    svg:hover {
-        fill: yellow;
     }
 `
 

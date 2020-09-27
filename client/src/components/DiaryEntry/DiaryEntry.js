@@ -14,7 +14,6 @@ import ConfirmationWindow from "../ConfirmationWindow/ConfirmationWindow";
 import {withRouter} from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 import DeleteButton from "../Button/DeleteButton";
-import VisuallyHidden from "../../shared/VisuallyHidden";
 
 class DiaryEntry extends Component {
     state = {
@@ -60,11 +59,13 @@ class DiaryEntry extends Component {
                 <div className="DiaryEntry__btns">
                     <ButtonLikeLink title="Edit entry" to={`/diary/edit/${id}`}>Edit entry</ButtonLikeLink>
                     <DeleteButton  
-                        iconOnly="true"
+                        iconOnly={true}
                         title="Remove entry" 
-                        btnTheme="danger" 
                         onClick={this.askForRemoveConfirmation}
-                    />
+                    >
+                        Remove
+                    </DeleteButton>
+                
                 </div>
                 {this.state.removeConfirmationWindow && 
                     <ConfirmationWindow cancel={this.cancelRemoveConfirmation}>
@@ -72,13 +73,17 @@ class DiaryEntry extends Component {
                         <div className="DiaryEntry__btns">
                             <Button 
                                 title="Don't remove" btnTheme="primary" 
-                                onClick={this.cancelRemoveConfirmation}>Cancel
+                                onClick={this.cancelRemoveConfirmation}>
+                                Cancel
                             </Button>
                             <DeleteButton 
                                 loading={this.state.removing} 
-                                title="Remove entry" btnTheme="danger" 
+                                title="Remove entry" 
                                 onClick={this.removeDiaryEntry}
-                            />
+                            >
+                                Remove
+                            </DeleteButton  >
+                            
                             </div>  
                     </ConfirmationWindow>
                 }
