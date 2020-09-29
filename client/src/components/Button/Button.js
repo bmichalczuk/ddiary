@@ -4,7 +4,6 @@ import Spinner from "../Spinner/Spinner";
 import PropTypes from "prop-types";
 import btnThemes from "../../shared/btnThemes";
 
-
 const StyledButton = styled.button`
         padding: 0.5em 1em;
         font-size: 1em;

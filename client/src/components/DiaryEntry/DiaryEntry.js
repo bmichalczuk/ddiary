@@ -14,6 +14,9 @@ import ConfirmationWindow from "../ConfirmationWindow/ConfirmationWindow";
 import {withRouter} from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 import DeleteButton from "../Button/DeleteButton";
+import ButtonLikeEditLink from "../ButtonLikeLink/ButtonLikeEditLink";
+import ButtonLikeLinkWithIcon from "../ButtonLikeLink/ButtonLikeLinkWithIcon";
+import EditIcon from "../../Icons/EditIcon";
 
 class DiaryEntry extends Component {
     state = {
@@ -57,7 +60,7 @@ class DiaryEntry extends Component {
                     readOnly={true}
                 />          
                 <div className="DiaryEntry__btns">
-                    <ButtonLikeLink title="Edit entry" to={`/diary/edit/${id}`}>Edit entry</ButtonLikeLink>
+                    <ButtonLikeEditLink title="Edit entry" to={`/diary/edit/${id}`}>Edit entry</ButtonLikeEditLink>
                     <DeleteButton  
                         iconOnly={true}
                         title="Remove entry" 

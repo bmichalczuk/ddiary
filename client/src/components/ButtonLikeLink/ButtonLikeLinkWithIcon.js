@@ -1,26 +1,26 @@
 import React from "react";
-import Button from "./Button";
+import ButtonLikeLink from "./ButtonLikeLink";
 import styled from "styled-components";
 import btnThemes from "../../shared/btnThemes";
 import VisuallyHidden from "../../shared/VisuallyHidden";
 import PropTypes from "prop-types";
 
 
-const ButtonWithIcon = ({iconOnly = false, ...rest}) => {
+const ButtonLikeLinkWithIcon = ({iconOnly = false, ...rest}) => {
     const props = {iconOnly, ...rest};
     const {Icon, children} = props;
     return (
-        <Button {...props}>
+        <ButtonLikeLink {...props}>
             <Icon {...props}/>
             {iconOnly
                 ? <VisuallyHidden>{children}</VisuallyHidden>
                 : children
             }
-        </Button>
+        </ButtonLikeLink>
     );
 };
 
-const StyledButtonWithIcon = styled(ButtonWithIcon)`
+const StyledButtonLikeLinkWithIcon = styled(ButtonLikeLinkWithIcon)`
     ${({btnTheme}) => {
         const type = btnTheme ? btnTheme : "primary";
         const {color, hoverColor} = btnThemes[type];
@@ -38,9 +38,9 @@ const StyledButtonWithIcon = styled(ButtonWithIcon)`
     }}
 `;
 
-ButtonWithIcon.propTypes = {
+StyledButtonLikeLinkWithIcon.propTypes = {
     Icon: PropTypes.func.isRequired,
     iconOnly: PropTypes.bool
 };
 
-export default StyledButtonWithIcon;
+export default StyledButtonLikeLinkWithIcon;

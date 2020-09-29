@@ -5,7 +5,8 @@ import Button from "../Button/Button";
 
 const ButtonLikeLink = (props) => {
     return <Button {...props} as={Link}>{props.children}</Button>;
-}
+};
+
 
 const StyledButtonLikeLink = styled(ButtonLikeLink)`
     text-decoration: none;
