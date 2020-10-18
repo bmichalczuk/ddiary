@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Button from "../Button/Button";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
-import ButtonLikeLink from "../ButtonLikeLink/ButtonLikeLink";
 import {connect} from "react-redux";
 import {fetchUser} from "../../actions";
 import TextEditor from "../QTextEditor/QTextEditor";
@@ -15,8 +14,6 @@ import {withRouter} from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 import DeleteButton from "../Button/DeleteButton";
 import ButtonLikeEditLink from "../ButtonLikeLink/ButtonLikeEditLink";
-import ButtonLikeLinkWithIcon from "../ButtonLikeLink/ButtonLikeLinkWithIcon";
-import EditIcon from "../../Icons/EditIcon";
 
 class DiaryEntry extends Component {
     state = {
