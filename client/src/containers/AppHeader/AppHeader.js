@@ -1,13 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
-import ddiarylogo from "./logo-white.png";
 import styled from "styled-components";
 import Spinner from "../../components/Spinner/Spinner";
 import LoginIcon from "../../Icons/login";
 import LogoutIcon from "../../Icons/logout";
 import VisuallyInvisible from "../../shared/VisuallyHidden";
-import VisuallyHidden from "../../shared/VisuallyHidden";
-
+import AppHeading from "./AppHeading";
 
 export const AppHeader = (props) => {
     const renderAuthStatus = () => {
@@ -31,12 +29,7 @@ export const AppHeader = (props) => {
     }
     return (
         <header className={props.className}>
-            <h1 className="heading">
-                <a href={props.auth ? "/diary" : "/"} title="DDiary">
-                    <img src={ddiarylogo} alt="" />
-                    <VisuallyHidden>DDiary</VisuallyHidden>
-                </a>
-            </h1>
+            <AppHeading auth={props.auth} />
             <div className="auth">
                 {renderAuthStatus() }
             </div>
@@ -61,15 +54,6 @@ const styledAppHeader = styled(AppHeader)`
         fill: #ffffff;
         height: 1em;
         width: auto;
-    }
-    .heading {
-        margin-left: 1em;
-        display: flex;
-        align-items: center;
-        img {
-            height: 1.5em;
-            width: auto;
-        }
     }
     .auth {
         display: flex;
